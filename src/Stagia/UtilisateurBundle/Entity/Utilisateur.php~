@@ -1,0 +1,14 @@
+<?php
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Stagia\UtilisateurBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+
+class Utilisateur extends BaseUser
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
