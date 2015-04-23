@@ -1,0 +1,4 @@
+services:
+#    stagia_app.example:
+#        class: Stagia\AppBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
