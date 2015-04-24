@@ -8,6 +8,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {{ knp_menu_render('main', {'currentClass': 'active', 'ancestorClass':'active', 'template': 'StagiaAppBundle:Menu:knp_menu.html.twig'}) }}
         {% block body %}{% endblock %}
             
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>            

@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "knplabs/knp-menu":"~2.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "coresphere/console-bundle": "dev-master"
+        "coresphere/console-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "~2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
