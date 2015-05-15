@@ -9,14 +9,16 @@ Stagia\UtilisateurBundle\Entity\Utilisateur:
     fields:
         nom:
             type: string
+            length: 60
             nullable: true
             options:
                 default: null
         prenom:
             type: string
             nullable: true
+            length: 60
             options:
-                default: null
+                default: null       
         rue:
             type: string
             nullable: true
@@ -47,5 +49,37 @@ Stagia\UtilisateurBundle\Entity\Utilisateur:
             nullable: true
             options:
                 default: null
+    oneToMany:
+        stage:
+            targetEntity: Stagia\AppBundle\Entity\Stage
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            orderBy:
+              number: ASC
+            cascade: [ persist ]
+    oneToMany:
+        commentaire:
+            targetEntity: Stagia\AppBundle\Entity\Commentaire
+            orphanRemoval: false
+            mappedBy: utilisateur_createur
+            orderBy:
+              number: ASC
+            cascade: [ persist ]
+    oneToMany:
+        memoire:
+            targetEntity: Stagia\AppBundle\Entity\Memoire
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            orderBy:
+              number: ASC
+            cascade: [ persist ]
+    oneToMany:
+        sujet:
+            targetEntity: Stagia\AppBundle\Entity\Sujet
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            orderBy:
+              number: ASC
+            cascade: [ persist ]
         
             

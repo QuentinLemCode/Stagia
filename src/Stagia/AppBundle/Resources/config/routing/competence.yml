@@ -1,0 +1,30 @@
+competence:
+    path:     /
+    defaults: { _controller: "StagiaAppBundle:Competence:index" }
+
+competence_show:
+    path:     /{id}/show
+    defaults: { _controller: "StagiaAppBundle:Competence:show" }
+
+competence_new:
+    path:     /new
+    defaults: { _controller: "StagiaAppBundle:Competence:new" }
+
+competence_create:
+    path:     /create
+    defaults: { _controller: "StagiaAppBundle:Competence:create" }
+    methods:  POST
+
+competence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StagiaAppBundle:Competence:edit" }
+
+competence_update:
+    path:     /{id}/update
+    defaults: { _controller: "StagiaAppBundle:Competence:update" }
+    methods:  [POST, PUT]
+
+competence_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StagiaAppBundle:Competence:delete" }
+    methods:  [POST, DELETE]

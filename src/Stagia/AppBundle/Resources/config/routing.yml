@@ -1,3 +1,23 @@
+stagia_app_sujet:
+    resource: "@StagiaAppBundle/Resources/config/routing/sujet.yml"
+    prefix:   /sujet
+
+stagia_app_stage:
+    resource: "@StagiaAppBundle/Resources/config/routing/stage.yml"
+    prefix:   /stage
+
+stagia_app_memoire:
+    resource: "@StagiaAppBundle/Resources/config/routing/memoire.yml"
+    prefix:   /memoire
+
+stagia_app_competence:
+    resource: "@StagiaAppBundle/Resources/config/routing/competence.yml"
+    prefix:   /competence
+
+stagia_app_commentaire:
+    resource: "@StagiaAppBundle/Resources/config/routing/commentaire.yml"
+    prefix:   /commentaire
+
 accueil:
     path:     /
     defaults: { _controller: StagiaAppBundle:Default:index }

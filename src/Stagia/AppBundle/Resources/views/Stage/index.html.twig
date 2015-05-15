@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Stage list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>Competences</th>
+                <th>Date_publication</th>
+                <th>Lieu</th>
+                <th>Remuneration</th>
+                <th>Conventiondestage</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('stage_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.titre }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{% if entity.datedebut %}{{ entity.datedebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.datefin %}{{ entity.datefin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.competences }}</td>
+                <td>{% if entity.datepublication %}{{ entity.datepublication|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.lieu }}</td>
+                <td>{{ entity.remuneration }}</td>
+                <td>{{ entity.conventionDeStage }}</td>
+                <td>{{ entity.active }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('stage_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('stage_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('stage_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
