@@ -1,0 +1,30 @@
+sujet:
+    path:     /
+    defaults: { _controller: "StagiaAppBundle:Sujet:index" }
+
+sujet_show:
+    path:     /{id}/show
+    defaults: { _controller: "StagiaAppBundle:Sujet:show" }
+
+sujet_new:
+    path:     /new
+    defaults: { _controller: "StagiaAppBundle:Sujet:new" }
+
+sujet_create:
+    path:     /create
+    defaults: { _controller: "StagiaAppBundle:Sujet:create" }
+    methods:  POST
+
+sujet_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StagiaAppBundle:Sujet:edit" }
+
+sujet_update:
+    path:     /{id}/update
+    defaults: { _controller: "StagiaAppBundle:Sujet:update" }
+    methods:  [POST, PUT]
+
+sujet_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StagiaAppBundle:Sujet:delete" }
+    methods:  [POST, DELETE]

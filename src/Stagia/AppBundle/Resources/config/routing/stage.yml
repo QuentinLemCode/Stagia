@@ -1,0 +1,30 @@
+stage:
+    path:     /
+    defaults: { _controller: "StagiaAppBundle:Stage:index" }
+
+stage_show:
+    path:     /{id}/show
+    defaults: { _controller: "StagiaAppBundle:Stage:show" }
+
+stage_new:
+    path:     /new
+    defaults: { _controller: "StagiaAppBundle:Stage:new" }
+
+stage_create:
+    path:     /create
+    defaults: { _controller: "StagiaAppBundle:Stage:create" }
+    methods:  POST
+
+stage_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StagiaAppBundle:Stage:edit" }
+
+stage_update:
+    path:     /{id}/update
+    defaults: { _controller: "StagiaAppBundle:Stage:update" }
+    methods:  [POST, PUT]
+
+stage_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StagiaAppBundle:Stage:delete" }
+    methods:  [POST, DELETE]

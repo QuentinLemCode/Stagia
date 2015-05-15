@@ -1,0 +1,46 @@
+Stagia\AppBundle\Entity\Sujet:
+    type: entity
+    table: sujet
+    indexes:
+        name_index:
+            columns: [ nom ]
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 100
+            nullable: false
+            options:
+                default: ""
+        description:
+            type: text
+        date_creation:
+            type: date
+        validation:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+    manyToOne:
+        utilisateur_createur:
+            targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
+            inversedBy: sujet
+            joinColumn:
+              name: utilisateur_createur_id
+              referencedColumnName: id
+              nullable: false
+    oneToMany:
+        commentaires:
+            targetEntity: Commentaire
+            orphanRemoval: true
+            mappedBy: sujet
+            orderBy:
+                number: ASC
+            cascade: [ persist ]
+        
+        
+        

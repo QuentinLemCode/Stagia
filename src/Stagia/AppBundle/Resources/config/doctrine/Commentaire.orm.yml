@@ -1,0 +1,32 @@
+Stagia\AppBundle\Entity\Commentaire:
+    type: entity
+    table: commentaire
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: 100
+            nullable: false
+        texte:
+            type: text
+    manyToOne:
+        utilisateur_createur:
+            targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
+            inversedBy: commentaire
+            joinColumn:
+              name: utilisateur_createur_id
+              referencedColumnName: id
+              nullable: false
+    manyToOne:
+        sujet:
+            targetEntity: Sujet
+            inversedBy: commentaire
+            joinColumn:
+                name: sujet_id
+                referencedColumnName: id
+                nullable: false
+            

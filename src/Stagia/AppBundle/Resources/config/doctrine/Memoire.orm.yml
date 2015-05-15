@@ -1,0 +1,44 @@
+Stagia\AppBundle\Entity\Memoire:
+    type: entity
+    table: memoires
+    indexes:
+        name_index:
+            columns: [ nom ]
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length : 100
+            nullable: false
+            options:
+                default: ""
+        description:
+            type: text
+        date_creation:
+            type: date
+            nullable: false
+        annee:
+            type: integer
+    oneToMany:
+        fichier:
+            targetEntity: Fichier
+            orphanRemoval: true
+            mappedBy: memoire
+            orderBy:
+                number: ASC
+            cascade: [ persist ]
+    manyToOne:
+        utilisateur_createur:
+            targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
+            inversedBy: memoire
+            joinColumn:
+              name: utilisateur_createur_id
+              referencedColumnName: id
+              nullable: false
+        
+    
+                

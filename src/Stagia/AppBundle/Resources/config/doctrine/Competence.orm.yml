@@ -1,0 +1,14 @@
+Stagia\AppBundle\Entity\Competence:
+    type: entity
+    table: competence
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 80
+            nullable: false
+       

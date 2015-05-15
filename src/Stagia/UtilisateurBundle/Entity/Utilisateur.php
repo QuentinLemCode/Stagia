@@ -1,6 +1,4 @@
 <?php
-// src/Acme/UserBundle/Entity/User.php
-
 namespace Stagia\UtilisateurBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
@@ -242,5 +240,44 @@ class Utilisateur extends BaseUser
     public function getTelephone()
     {
         return $this->telephone;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $stage;
+
+
+    /**
+     * Add stage
+     *
+     * @param \Stagia\AppBundle\Entity\Stage $stage
+     *
+     * @return Utilisateur
+     */
+    public function addStage(\Stagia\AppBundle\Entity\Stage $stage)
+    {
+        $this->stage[] = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Remove stage
+     *
+     * @param \Stagia\AppBundle\Entity\Stage $stage
+     */
+    public function removeStage(\Stagia\AppBundle\Entity\Stage $stage)
+    {
+        $this->stage->removeElement($stage);
+    }
+
+    /**
+     * Get stage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStage()
+    {
+        return $this->stage;
     }
 }
