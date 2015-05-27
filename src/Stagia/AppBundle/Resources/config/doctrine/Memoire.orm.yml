@@ -25,11 +25,9 @@ Stagia\AppBundle\Entity\Memoire:
             type: integer
     oneToMany:
         fichier:
-            targetEntity: Fichier
+            targetEntity: \Stagia\AppBundle\Entity\Fichier
             orphanRemoval: true
             mappedBy: memoire
-            orderBy:
-                number: ASC
             cascade: [ persist ]
     manyToOne:
         utilisateur_createur:

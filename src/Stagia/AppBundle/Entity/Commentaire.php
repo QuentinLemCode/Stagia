@@ -109,4 +109,68 @@ class Commentaire
     {
         return $this->utilisateur_createur;
     }
+    /**
+     * @var \Stagia\UtilisateurBundle\Entity\Utilisateur
+     */
+    private $utilisateurcreateur;
+
+
+    /**
+     * @var \Stagia\AppBundle\Entity\Sujet
+     */
+    private $sujet;
+
+
+    /**
+     * Set sujet
+     *
+     * @param \Stagia\AppBundle\Entity\Sujet $sujet
+     *
+     * @return Commentaire
+     */
+    public function setSujet(\Stagia\AppBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Get sujet
+     *
+     * @return \Stagia\AppBundle\Entity\Sujet
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $date_creation;
+
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return Commentaire
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->date_creation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
 }

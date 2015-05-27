@@ -13,6 +13,8 @@ Stagia\AppBundle\Entity\Commentaire:
             nullable: false
         texte:
             type: text
+        date_creation:
+            type: datetime
     manyToOne:
         utilisateur_createur:
             targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
@@ -21,7 +23,6 @@ Stagia\AppBundle\Entity\Commentaire:
               name: utilisateur_createur_id
               referencedColumnName: id
               nullable: false
-    manyToOne:
         sujet:
             targetEntity: Sujet
             inversedBy: commentaire

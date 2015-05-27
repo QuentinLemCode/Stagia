@@ -55,31 +55,28 @@ Stagia\UtilisateurBundle\Entity\Utilisateur:
             orphanRemoval: true
             mappedBy: utilisateur_createur
             orderBy:
-              number: ASC
+              date_publication: ASC
             cascade: [ persist ]
-    oneToMany:
         commentaire:
             targetEntity: Stagia\AppBundle\Entity\Commentaire
             orphanRemoval: false
             mappedBy: utilisateur_createur
             orderBy:
-              number: ASC
+              date_creation: ASC
             cascade: [ persist ]
-    oneToMany:
         memoire:
             targetEntity: Stagia\AppBundle\Entity\Memoire
             orphanRemoval: true
             mappedBy: utilisateur_createur
-            orderBy:
-              number: ASC
             cascade: [ persist ]
-    oneToMany:
+            orderBy:
+              date_creation: ASC
         sujet:
             targetEntity: Stagia\AppBundle\Entity\Sujet
             orphanRemoval: true
             mappedBy: utilisateur_createur
-            orderBy:
-              number: ASC
             cascade: [ persist ]
+            orderBy:
+              date_creation: ASC
         
             
