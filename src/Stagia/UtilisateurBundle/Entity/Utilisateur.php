@@ -280,4 +280,121 @@ class Utilisateur extends BaseUser
     {
         return $this->stage;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $commentaire;
+
+
+    /**
+     * Add commentaire
+     *
+     * @param \Stagia\AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Utilisateur
+     */
+    public function addCommentaire(\Stagia\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \Stagia\AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\Stagia\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $memoire;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $sujet;
+
+
+    /**
+     * Add memoire
+     *
+     * @param \Stagia\AppBundle\Entity\Memoire $memoire
+     *
+     * @return Utilisateur
+     */
+    public function addMemoire(\Stagia\AppBundle\Entity\Memoire $memoire)
+    {
+        $this->memoire[] = $memoire;
+
+        return $this;
+    }
+
+    /**
+     * Remove memoire
+     *
+     * @param \Stagia\AppBundle\Entity\Memoire $memoire
+     */
+    public function removeMemoire(\Stagia\AppBundle\Entity\Memoire $memoire)
+    {
+        $this->memoire->removeElement($memoire);
+    }
+
+    /**
+     * Get memoire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemoire()
+    {
+        return $this->memoire;
+    }
+
+    /**
+     * Add sujet
+     *
+     * @param \Stagia\AppBundle\Entity\Sujet $sujet
+     *
+     * @return Utilisateur
+     */
+    public function addSujet(\Stagia\AppBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet[] = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Remove sujet
+     *
+     * @param \Stagia\AppBundle\Entity\Sujet $sujet
+     */
+    public function removeSujet(\Stagia\AppBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet->removeElement($sujet);
+    }
+
+    /**
+     * Get sujet
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
+    }
 }

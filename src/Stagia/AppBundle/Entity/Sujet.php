@@ -213,4 +213,19 @@ class Sujet
     {
         return $this->utilisateur_createur;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $commentaire;
+
+
+    /**
+     * Get commentaire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
 }

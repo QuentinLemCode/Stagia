@@ -25,22 +25,20 @@ Stagia\AppBundle\Entity\Sujet:
             nullable: false
             options:
                 default: false
-    manyToOne:
-        utilisateur_createur:
-            targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
-            inversedBy: sujet
-            joinColumn:
-              name: utilisateur_createur_id
-              referencedColumnName: id
-              nullable: false
+                
     oneToMany:
-        commentaires:
+        commentaire:
             targetEntity: Commentaire
             orphanRemoval: true
             mappedBy: sujet
             orderBy:
-                number: ASC
+                date_creation: ASC
             cascade: [ persist ]
+            
+    manyToOne:
+        utilisateur_createur:
+            targetEntity: \Stagia\UtilisateurBundle\Entity\Utilisateur
+            inversedBy: sujet
         
         
         

@@ -17,6 +17,10 @@
                 <th>Texte</th>
                 <td>{{ entity.texte }}</td>
             </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
+            </tr>
         </tbody>
     </table>
 
