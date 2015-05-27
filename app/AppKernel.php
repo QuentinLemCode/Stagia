@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Stagia\AppBundle\StagiaAppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Stagia\UtilisateurBundle\StagiaUtilisateurBundle(),
         );
 
