@@ -23,7 +23,18 @@ class MenuBuilder
     
     public function mainMenu()
     {
-    	$menu = $this->factory->createItem('Stagia', array('uri' => '/'));
+    	$menu = $this->factory->createItem('root', array(
+            'navbar' => true,
+            'pull-right' => true,
+            ));
+        $menu->addChild('Stages', array(
+            'icon' => 'bolt',
+            'route' => 'stage',
+            ));
+        $menu->addChild('Mémoires', array(
+            'icon' => 'book',
+            'route' => 'memoire',
+        ));
         return $menu;
     }
 

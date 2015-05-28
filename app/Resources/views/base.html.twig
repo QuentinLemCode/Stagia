@@ -1,5 +1,18 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
-{% block navbar %}
-    {{knp_menu_render('main')}}
-{% endblock %}
+
+    {% block head_style %}
+        {% stylesheets filter="cssrewrite,lessphp"
+            'bundles/mopabootstrap/less/mopabootstrapbundle-fa4.less'
+        %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    {% endblock head_style %}
+
+    {% block navbar %}
+        {% include "StagiaAppBundle:Menu:menu.html.twig" %}
+    {% endblock %}
+
+
+    {% block footer %} Stagia - 2015 {% endblock %}
+    
