@@ -34,7 +34,6 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ MopaBootstrapBundle ]
     #java: /usr/bin/java
     filters:
         less: ~
@@ -85,6 +84,10 @@ fos_user:
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
+    menu: ~
+    icons:
+        icon_set: fontawesome4
+        shortcut: icon
     initializr:
         meta:
             title:        "Stagia"
@@ -100,3 +103,4 @@ mopa_bootstrap:
             wt: 'xxx'
             analytics: 'UA-xxxxxxx-xx'
         diagnostic_mode: false
+        
