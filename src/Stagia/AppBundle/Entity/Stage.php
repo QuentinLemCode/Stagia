@@ -70,6 +70,7 @@ class Stage
     public function __constructor()
     {
         $this->date_publication = new \DateTime();
+        $this->active = true;
     }
     
     /**
