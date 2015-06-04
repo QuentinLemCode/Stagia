@@ -3,28 +3,28 @@ stage:
     defaults: { _controller: "StagiaAppBundle:Stage:index" }
 
 stage_show:
-    path:     /{id}/show
+    path:     /{id}/Afficher
     defaults: { _controller: "StagiaAppBundle:Stage:show" }
 
 stage_new:
-    path:     /new
+    path:     /Nouveau
     defaults: { _controller: "StagiaAppBundle:Stage:new" }
 
 stage_create:
-    path:     /create
+    path:     /Creer
     defaults: { _controller: "StagiaAppBundle:Stage:create" }
     methods:  POST
 
 stage_edit:
-    path:     /{id}/edit
+    path:     /{id}/Modifier
     defaults: { _controller: "StagiaAppBundle:Stage:edit" }
 
 stage_update:
-    path:     /{id}/update
+    path:     /{id}/MisAJour
     defaults: { _controller: "StagiaAppBundle:Stage:update" }
     methods:  [POST, PUT]
 
 stage_delete:
-    path:     /{id}/delete
+    path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Stage:delete" }
     methods:  [POST, DELETE]
