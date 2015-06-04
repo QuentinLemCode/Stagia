@@ -48,6 +48,7 @@ class Memoire
     public function __construct()
     {
         $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date_creation = new \DateTime();
     }
 
     /**

@@ -31,6 +31,11 @@ class Sujet
      * @var boolean
      */
     private $validation = false;
+    
+    public function __constructor()
+    {
+        $this->date_creation = new \DateTime();
+    }
 
 
     /**

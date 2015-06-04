@@ -67,7 +67,11 @@ class Stage
      */
     private $utilisateur_createur;
 
-
+    public function __constructor()
+    {
+        $this->date_publication = new \DateTime();
+    }
+    
     /**
      * Get id
      *
