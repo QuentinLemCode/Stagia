@@ -26,6 +26,11 @@ class Commentaire
      * @var \Stagia\AppBundle\Entity\Utilisateur
      */
     private $utilisateur_createur;
+    
+    public function __constructor()
+    {
+        $this->date_creation = new \DateTime();
+    }
 
 
     /**
