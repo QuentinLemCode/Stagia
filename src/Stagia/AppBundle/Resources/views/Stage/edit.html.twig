@@ -1,18 +1,94 @@
 {% extends '::base.html.twig' %}
 
+{% block headline %}
+    Modification du stage
+{% endblock %}
+
 {% block content %}
-    <h1>Stage edit</h1>
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+    {{ form_row(edit_form.titre) }}
+    {{ form_row(edit_form.description) }}
+    
+        {{form_row(edit_form.date_debut) }}
+        {{ form_row(edit_form.date_fin) }}
 
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
+    {{ form_end(edit_form) }}
+    
+   <ul class="record_actions">
     <li>
         <a href="{{ path('stage') }}">
-            Back to the list
+            Retour
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+{% endblock %}
+    
+{% block foot_script_assetic %}
+
+    {{ parent() }}
+
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
+    '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(function(){
+
+            $('[data-provider="datepicker"]').datetimepicker({
+                autoclose: true,
+                format: 'dd/mm/yyyy',
+                language: 'fr',
+                minView: 'month',
+                pickerPosition: 'bottom-left',
+                todayBtn: true,
+                startView: 'month'
+            });
+
+            $('[data-provider="datetimepicker"]').datetimepicker({
+                autoclose: true,
+                format: 'dd/mm/yyyy hh:ii',
+                language: 'fr',
+                pickerPosition: 'bottom-left',
+                todayBtn: true
+            });
+
+            $('[data-provider="timepicker"]').datetimepicker({
+                autoclose: true,
+                format: 'hh:ii',
+                formatViewType: 'time',
+                maxView: 'day',
+                minView: 'hour',
+                pickerPosition: 'bottom-left',
+                startView: 'day'
+            });
+
+            // Restore value from hidden input
+            $('input[type=hidden]', '.date').each(function(){
+                if($(this).val()) {
+                    $(this).parent().datetimepicker('setValue');
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}
+
+{% block head_style %}
+
+    {{ parent() }}
+
+    {% stylesheets
+    '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/build/build_standalone.less'
+    %}
+    <link type="text/css" rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+
 {% endblock %}
     
 

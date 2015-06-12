@@ -83,7 +83,8 @@ fos_user:
     user_class: Stagia\UtilisateurBundle\Entity\Utilisateur
 
 mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
+    form: 
+      show_legend: false
     menu: ~
     icons:
         icon_set: fontawesome4
