@@ -3,7 +3,7 @@
 
     {% block head_style %}
         {% stylesheets filter="cssrewrite,lessphp"
-            'bundles/mopabootstrap/less/mopabootstrapbundle-fa4.less'
+            '@StagiaAppBundle/Resources/public/less/bootstrap.less'
         %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
@@ -12,6 +12,15 @@
 
     {% block navbar %}
         {% include "StagiaAppBundle:Menu:menu.html.twig" %}
+    {% endblock %}
+            
+    {% block content_row %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     {% endblock %}
             
     {% block headline %}

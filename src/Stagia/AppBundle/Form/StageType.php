@@ -16,16 +16,33 @@ class StageType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description')
-            ->add('date_debut')
-            ->add('date_fin')
-            ->add('competences')
-            ->add('date_publication')
+            ->add('description', null, array(
+                'label' => 'Description du stage'
+            ))
+            ->add('date_debut', null, array(
+                'widget' => 'single_text',
+                'datepicker' => true,
+                'attr' => array(
+                    'class'       => 'col-md-4',
+                    'placeholder' => ''
+            )
+            ))
+            ->add('date_fin', null, array(
+                'widget' => 'single_text',
+                'datepicker' => true,
+                'attr' => array(
+                    'class'       => 'col-md-4',
+                    'placeholder' => ''
+            )
+            ))
+            ->add('competences', null, array(
+                'label' => 'Compétences demandés'
+            ))
             ->add('lieu')
             ->add('remuneration')
-            ->add('conventionDeStage')
-            ->add('active')
-            ->add('utilisateur_createur')
+            ->add('conventionDeStage', null, array(
+                'label' => 'Convention de stage obligatoire'
+            ))
         ;
     }
     

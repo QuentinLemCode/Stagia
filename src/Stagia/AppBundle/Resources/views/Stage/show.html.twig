@@ -1,37 +1,28 @@
 {% extends '::base.html.twig' %}
 
-{% block content -%}
-    <h1>Stage</h1>
+{% block headline %}
+    {{ entity.titre }}
+{% endblock %}
 
+
+{% block content -%}
     <table class="record_properties">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ entity.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
+                <th>Description du stage : </th>
                 <td>{{ entity.description }}</td>
             </tr>
             <tr>
-                <th>Date_debut</th>
-                <td>{{ entity.datedebut|date('Y-m-d H:i:s') }}</td>
+                <th>Date de début</th>
+                <td>{{ entity.datedebut|date('d-m-Y') }}</td>
             </tr>
             <tr>
-                <th>Date_fin</th>
-                <td>{{ entity.datefin|date('Y-m-d H:i:s') }}</td>
+                <th>Date de fin</th>
+                <td>{{ entity.datefin|date('d-m-Y') }}</td>
             </tr>
             <tr>
-                <th>Competences</th>
+                <th>Compétences demandés : </th>
                 <td>{{ entity.competences }}</td>
-            </tr>
-            <tr>
-                <th>Date_publication</th>
-                <td>{{ entity.datepublication|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Lieu</th>
@@ -39,30 +30,31 @@
             </tr>
             <tr>
                 <th>Remuneration</th>
-                <td>{{ entity.remuneration }}</td>
+                <td>{{ entity.remuneration }} €</td>
             </tr>
             <tr>
-                <th>Conventiondestage</th>
-                <td>{{ entity.conventionDeStage }}</td>
-            </tr>
-            <tr>
-                <th>Active</th>
-                <td>{{ entity.active }}</td>
+                <th>Convention de stage : </th>
+                {% if entity.conventionDeStage %}
+                    <td>Obligatoire</td>
+                {% else %}
+                    <td>Facultatif</td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
+<p class="text-right"> Publié le {{ entity.datepublication|date('d-m-Y') }} </p>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('stage') }}">
-            Back to the list
+            Retour
         </a>
     </li>
-    <li>
+   {# <li>
         <a href="{{ path('stage_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+    <li>{{ form(delete_form) }}</li>#}
 </ul>
 {% endblock %}
