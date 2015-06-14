@@ -11,4 +11,8 @@ Stagia\AppBundle\Entity\Competence:
             type: string
             length: 80
             nullable: false
+    manyToMany:
+        stages:
+            targetEntity: \Stagia\AppBundle\Entity\Stage
+            mappedBy: competences
        

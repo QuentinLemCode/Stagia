@@ -33,7 +33,7 @@ class Stage
     private $date_fin;
 
     /**
-     * @var string
+     * @var ArrayCollection
      */
     private $competences;
 
@@ -69,8 +69,8 @@ class Stage
 
     public function __constructor()
     {
-        $this->date_publication = new \DateTime();
         $this->active = true;
+        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -179,29 +179,7 @@ class Stage
         return $this->date_fin;
     }
 
-    /**
-     * Set competences
-     *
-     * @param string $competences
-     *
-     * @return Stage
-     */
-    public function setCompetences($competences)
-    {
-        $this->competences = $competences;
 
-        return $this;
-    }
-
-    /**
-     * Get competences
-     *
-     * @return string
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
-    }
 
     /**
      * Set datePublication
@@ -330,7 +308,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setUtilisateurCreateur(\Stagia\AppBundle\Entity\Utilisateur $utilisateurCreateur)
+    public function setUtilisateurCreateur(\Stagia\UtilisateurBundle\Entity\Utilisateur $utilisateurCreateur)
     {
         $this->utilisateur_createur = $utilisateurCreateur;
 
@@ -345,5 +323,41 @@ class Stage
     public function getUtilisateurCreateur()
     {
         return $this->utilisateur_createur;
+    }
+
+    /**
+     * Add competence
+     *
+     * @param \Stagia\AppBundle\Entity\Competence $competence
+     *
+     * @return Stage
+     */
+    public function addCompetence(\Stagia\AppBundle\Entity\Competence $competence)
+    {
+        $competence->addStage($this);
+        $this->competences[] = $competence;
+
+        return $this;
+    }
+
+    /**
+     * Remove competence
+     *
+     * @param \Stagia\AppBundle\Entity\Competence $competence
+     */
+    public function removeCompetence(\Stagia\AppBundle\Entity\Competence $competence)
+    {
+        $competence->removeStage($this);
+        $this->competences->removeElement($competence);
+    }
+    
+    /**
+     * Get competences
+     *
+     * @return ArrayCollection
+     */
+    public function getCompetences()
+    {
+        return $this->competences;
     }
 }

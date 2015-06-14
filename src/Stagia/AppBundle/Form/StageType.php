@@ -35,13 +35,39 @@ class StageType extends AbstractType
                     'placeholder' => ''
             )
             ))
-            ->add('competences', null, array(
-                'label' => 'Compétences demandés'
-            ))
+            ->add('competences', new CompetenceType())
+            /*->add('competences', 'collection', array(
+                'type' => new CompetenceType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'widget_add_btn' => array('label' => 'Ajouter'),
+                'show_legend' => false,
+                'by_reference' => false,
+                'label' => 'Compétences demandés',
+                'horizontal_wrap_children' => true,
+                'options' => array(
+                    'label_render' => false,
+                    'widget_addon_prepend' => array(
+                        'text' => '@',
+                    ),
+                    'widget_remove_btn' => array(
+                        'label' => "Supprimer",
+                        'horizontal_wrapper_div' => array(
+                            'class' => "col-lg-4"
+                        ),
+                        'wrapper_div' => false,
+                    ),
+                    'horizontal' => true,
+                    'horizontal_label_offset_class' => "",
+                    'horizontal_input_wrapper_class' => "col-lg-8",
+                )
+            ))*/
             ->add('lieu')
             ->add('remuneration')
-            ->add('conventionDeStage', null, array(
-                'label' => 'Convention de stage obligatoire'
+            ->add('conventionDeStage', 'choice', array(
+                'choices' => array(true => 'Oui', false => 'Non'),
+                'label' => 'Convention de stage obligatoire ?'
             ))
         ;
     }

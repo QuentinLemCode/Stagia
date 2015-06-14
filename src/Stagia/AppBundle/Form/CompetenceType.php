@@ -4,7 +4,7 @@ namespace Stagia\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Stagia\AppBundle\Form\DataTransformer\CompetenceTranformer;
 
 class CompetenceType extends AbstractType
 {
@@ -14,21 +14,13 @@ class CompetenceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('nom')
-        ;
+        $builder->addModelTransformer(new CompetenceTranformer());
     }
     
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Stagia\AppBundle\Entity\Competence'
-        ));
+        return 'text';
     }
-
     /**
      * @return string
      */

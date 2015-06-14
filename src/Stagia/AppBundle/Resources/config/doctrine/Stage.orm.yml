@@ -24,8 +24,6 @@ Stagia\AppBundle\Entity\Stage:
             type: date
         date_fin:
             type: date
-        competences:
-            type: text
         date_publication:
             type: date
         lieu:
@@ -51,5 +49,17 @@ Stagia\AppBundle\Entity\Stage:
         utilisateur_createur:
             targetEntity: \Stagia\UtilisateurBundle\Entity\Utilisateur
             inversedBy: stage
-
+    manyToMany:
+        competences:
+            targetEntity: \Stagia\AppBundle\Entity\Competence
+            inversedBy: stages
+            cascade: [ persist ]
+            joinTable:
+                name: stages_competence
+                joinColumns:
+                    stage_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    competence_id:
+                        referencedColumnName: id
                 

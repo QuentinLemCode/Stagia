@@ -42,8 +42,10 @@ class StageController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setUtilisateurCreateur($this->getUser());
+            $entity->setDatePublication(new \DateTime());
             $em->persist($entity);
             $em->flush();
+            $this->addFlash('notice', 'Annonce enregistré !');
 
             return $this->redirect($this->generateUrl('stage_show', array('id' => $entity->getId())));
         }
@@ -68,7 +70,7 @@ class StageController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer'));
 
         return $form;
     }
@@ -148,7 +150,7 @@ class StageController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Mettre à jour'));
 
         return $form;
     }
@@ -218,7 +220,7 @@ class StageController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stage_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
         ;
     }

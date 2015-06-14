@@ -12,7 +12,6 @@
     
         {{form_row(edit_form.date_debut) }}
         {{ form_row(edit_form.date_fin) }}
-
     {{ form_end(edit_form) }}
     
    <ul class="record_actions">
@@ -32,6 +31,7 @@
     {% javascripts
     '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
     '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

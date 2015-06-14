@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <th>Description du stage : </th>
-                <td>{{ entity.description }}</td>
+                <td>{{ entity.description|raw }}</td>
             </tr>
             <tr>
                 <th>Date de début</th>
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>Compétences demandés : </th>
-                <td>{{ entity.competences }}</td>
+                <td>{{ entity.competences}}</td>
             </tr>
             <tr>
                 <th>Lieu</th>
@@ -42,7 +42,7 @@
             </tr>
         </tbody>
     </table>
-<p class="text-right"> Publié le {{ entity.datepublication|date('d-m-Y') }} </p>
+<p class="text-right"> Publié le {{ entity.datepublication|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
 
         <ul class="record_actions">
     <li>
