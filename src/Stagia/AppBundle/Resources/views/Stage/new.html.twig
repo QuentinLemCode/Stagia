@@ -1,4 +1,6 @@
 {% extends '::base.html.twig' %}
+{% form_theme form _self %}
+
 {% block headline %}
     Nouveau stage
 {% endblock %}
@@ -20,6 +22,7 @@
     {% javascripts
     '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
     '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

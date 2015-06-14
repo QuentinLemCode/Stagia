@@ -43,12 +43,5 @@ UPGRADE.md
 app/SymfonyRequirements.php
 /nbproject/private/
 nbproject/
-web/css/bab9907.css
-web/css/bab9907_mopabootstrapbundle_1.css
-web/css/c1a17c8.css
-web/css/c1a17c8_mopabootstrapbundle-fa4_1.css
-web/css/e1efe2f.css
-web/css/e1efe2f_build_standalone_1.css
-web/js/7090f11.js
-web/js/7090f11_bootstrap-datetimepicker.fr_2.js
-web/js/7090f11_bootstrap-datetimepicker_1.js
+web/css/
+web/js/
