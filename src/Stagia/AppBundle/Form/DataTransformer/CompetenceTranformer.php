@@ -11,8 +11,15 @@ class CompetenceTranformer implements DataTransformerInterface{
         if (!$competences) {
             $competences = array();
         }
- 
-        return implode(', ', $competences->getValues()); // concatenate the tags to one string
+        
+        if(!empty(($competences)))
+        {
+            return implode(', ', $competences->getValues());
+        }
+        else
+        {
+            return '';
+        }
     }
     
     public function reverseTransform($competences) {
