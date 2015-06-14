@@ -3,7 +3,6 @@
 namespace Stagia\AppBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Stagia\AppBundle\Entity\Competence;
 
 class CompetenceTranformer implements DataTransformerInterface{
 
@@ -11,15 +10,7 @@ class CompetenceTranformer implements DataTransformerInterface{
         if (!$competences) {
             $competences = array();
         }
-        
-        if(!empty(($competences)))
-        {
-            return implode(', ', $competences->getValues());
-        }
-        else
-        {
-            return '';
-        }
+            return implode(', ', $competences);
     }
     
     public function reverseTransform($competences) {
@@ -27,13 +18,7 @@ class CompetenceTranformer implements DataTransformerInterface{
             $competences = '';
         }
  
-        $array = array_filter(array_map('trim', explode(',', $competences)));   
-        $s = array();
-        foreach($array as $a)
-        {
-            $s[] = new Competence($a);
-        }
-        return $s;
+        return array_filter(array_map('trim', explode(',', $competences)));
     }
 
 

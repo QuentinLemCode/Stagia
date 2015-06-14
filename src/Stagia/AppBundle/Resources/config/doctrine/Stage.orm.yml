@@ -45,21 +45,10 @@ Stagia\AppBundle\Entity\Stage:
             nullable: false
             options:
                 default: true
+        competences:
+            type: text
     manyToOne:
         utilisateur_createur:
             targetEntity: \Stagia\UtilisateurBundle\Entity\Utilisateur
             inversedBy: stage
-    manyToMany:
-        competences:
-            targetEntity: \Stagia\AppBundle\Entity\Competence
-            inversedBy: stages
-            cascade: [ persist ]
-            joinTable:
-                name: stages_competence
-                joinColumns:
-                    stage_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    competence_id:
-                        referencedColumnName: id
                 

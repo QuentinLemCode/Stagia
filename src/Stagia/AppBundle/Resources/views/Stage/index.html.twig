@@ -9,7 +9,10 @@
             {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': entity} %}
         {% endfor %}
     </div>
-    <div class="col-md-3">
-        <a class="btn btn-default" href="{{ path('stage_new') }}" role="button">Créer un nouveau stage</a>
-    </div>
+    <aside>
+        <div class="col-md-3">
+            <input placeholder="Rechercher" />
+            <a class="btn btn-default" href="{{ path('stage_new') }}" role="button">Créer un nouveau stage</a>
+        </div>
+    </aside>
     {% endblock %}
