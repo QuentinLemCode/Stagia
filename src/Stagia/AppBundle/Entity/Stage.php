@@ -33,7 +33,7 @@ class Stage
     private $date_fin;
 
     /**
-     * @var ArrayCollection
+     * @var string
      */
     private $competences;
 
@@ -324,40 +324,27 @@ class Stage
     {
         return $this->utilisateur_createur;
     }
-
-    /**
-     * Add competence
-     *
-     * @param \Stagia\AppBundle\Entity\Competence $competence
-     *
-     * @return Stage
-     */
-    public function addCompetence(\Stagia\AppBundle\Entity\Competence $competence)
-    {
-        $competence->addStage($this);
-        $this->competences[] = $competence;
-
-        return $this;
-    }
-
-    /**
-     * Remove competence
-     *
-     * @param \Stagia\AppBundle\Entity\Competence $competence
-     */
-    public function removeCompetence(\Stagia\AppBundle\Entity\Competence $competence)
-    {
-        $competence->removeStage($this);
-        $this->competences->removeElement($competence);
-    }
-    
     /**
      * Get competences
      *
-     * @return ArrayCollection
+     * @return string
      */
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    /**
+     * Set competences
+     *
+     * @param string $competences
+     *
+     * @return Stage
+     */
+    public function setCompetences($competences)
+    {
+        $this->competences = $competences;
+
+        return $this;
     }
 }

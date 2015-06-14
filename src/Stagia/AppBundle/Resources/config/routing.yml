@@ -6,10 +6,6 @@ stagia_app_stage:
     resource: "@StagiaAppBundle/Resources/config/routing/stage.yml"
     prefix:   /Stage
 
-stagia_app_competence:
-    resource: "@StagiaAppBundle/Resources/config/routing/competence.yml"
-    prefix:   /Competence
-
 stagia_app_commentaire:
     resource: "@StagiaAppBundle/Resources/config/routing/commentaire.yml"
     prefix:   /Commentaire
