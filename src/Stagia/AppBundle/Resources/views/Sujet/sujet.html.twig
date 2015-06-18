@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{sujet.nom}}</h3>
+  </div>
+  <div class="panel-body">
+    {{sujet.description}}
+      <div class="pull-right">
+          <ul class="list-inline">
+              <li><a href="{{ path('sujet_edit', { 'id': sujet.id }) }}" >{{icon('edit')}} Modifier</a></li>
+              <li><a href="{{ path('sujet_show', { 'id': sujet.id }) }}" >{{icon('hand-o-right')}} Plus d'infos</a></li>
+          </ul>
+            
+      </div>
+  </div>
+
+</div>

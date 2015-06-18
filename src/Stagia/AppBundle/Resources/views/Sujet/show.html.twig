@@ -1,42 +1,27 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}Sujet de mémoire{% endblock %}
+{% block headline %}Sujet : {{entity.nom}}{% endblock %}
 {% block content -%}
-    <h1>Sujet</h1>
+    {% if entity.validation %}
+        Ce sujet est validé !
+        {% else %}
+            Ce sujet n'est pas validé
+        {%endif%}
+        <div class="well">
+            <p>{{entity.description}}</p>
+        </div>
+    <p class="text-right">Publié le {{ entity.datecreation|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ entity.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ entity.description }}</td>
-            </tr>
-            <tr>
-                <th>Date_creation</th>
-                <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Validation</th>
-                <td>{{ entity.validation }}</td>
-            </tr>
-        </tbody>
-    </table>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('sujet') }}">
-            Back to the list
+            Retour
         </a>
     </li>
     <li>
         <a href="{{ path('sujet_edit', { 'id': entity.id }) }}">
-            Edit
+            Modifier
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

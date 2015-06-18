@@ -85,6 +85,7 @@ fos_user:
 mopa_bootstrap:
     form: 
       show_legend: false
+      render_optional_text: false
     menu: ~
     icons:
         icon_set: fontawesome4

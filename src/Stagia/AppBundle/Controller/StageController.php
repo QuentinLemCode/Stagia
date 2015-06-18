@@ -45,7 +45,7 @@ class StageController extends Controller
             $entity->setDatePublication(new \DateTime());
             $em->persist($entity);
             $em->flush();
-            $this->addFlash('notice', 'Annonce enregistré !');
+            $this->addFlash('success', 'Annonce enregistré !');
 
             return $this->redirect($this->generateUrl('stage_show', array('id' => $entity->getId())));
         }
@@ -69,9 +69,6 @@ class StageController extends Controller
             'action' => $this->generateUrl('stage_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Créer'));
-
         return $form;
     }
 
@@ -149,9 +146,6 @@ class StageController extends Controller
             'action' => $this->generateUrl('stage_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Mettre à jour'));
-
         return $form;
     }
     /**
@@ -220,7 +214,9 @@ class StageController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stage_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Supprimer'))
+            ->add('submit', 'submit', array(
+                'label' => 'Supprimer',
+                'icon' => 'trash'))
             ->getForm()
         ;
     }

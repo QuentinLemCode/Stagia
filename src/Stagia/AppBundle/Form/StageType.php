@@ -15,11 +15,14 @@ class StageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
+            ->add('titre', null, array(
+                'label' => 'Titre du stage : '
+            ))
             ->add('description', null, array(
-                'label' => 'Description du stage'
+                'label' => 'Description du stage : '
             ))
             ->add('date_debut', null, array(
+                'label' => 'Date de début de stage : ',
                 'widget' => 'single_text',
                 'datepicker' => true,
                 'attr' => array(
@@ -28,6 +31,7 @@ class StageType extends AbstractType
             )
             ))
             ->add('date_fin', null, array(
+                'label' => 'Date de fin de stage : ',
                 'widget' => 'single_text',
                 'datepicker' => true,
                 'attr' => array(
@@ -35,12 +39,22 @@ class StageType extends AbstractType
                     'placeholder' => ''
             )
             ))
-            ->add('competences')
-            ->add('lieu')
-            ->add('remuneration')
+            ->add('competences', null, array(
+                'label' => 'Compétences demandées : '
+            ))
+            ->add('lieu', null, array(
+                'label' => 'Adresse du stage (facultatif) : '
+            ))
+            ->add('remuneration', null, array(
+                'label' => 'Rémuneration (facultatif) : '
+            ))
             ->add('conventionDeStage', 'choice', array(
                 'choices' => array(true => 'Oui', false => 'Non'),
                 'label' => 'Convention de stage obligatoire ?'
+            ))
+            ->add('sauvegarder','submit', array(
+                'label' => 'Enregistrer',
+                'icon' => 'save'
             ))
         ;
     }

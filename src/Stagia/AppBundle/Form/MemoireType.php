@@ -20,6 +20,10 @@ class MemoireType extends AbstractType
             ->add('date_creation')
             ->add('annee')
             ->add('fichier')
+            ->add('sauvegarder','submit', array(
+                'label' => 'Enregistrer',
+                'icon' => 'save'
+            ))
         ;
     }
     

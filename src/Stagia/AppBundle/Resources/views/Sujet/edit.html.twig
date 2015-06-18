@@ -1,14 +1,13 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}Modification{% endblock %}
+{% block headline %}Modification du sujet : {{entity.nom}}{% endblock %}
 {% block content -%}
-    <h1>Sujet edit</h1>
-
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
+    <ul class="record_actions">
     <li>
         <a href="{{ path('sujet') }}">
-            Back to the list
+            Retour
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

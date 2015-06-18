@@ -44,7 +44,10 @@
     </table>
 <p class="text-right"> Publié le {{ entity.datepublication|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
 
-        <ul class="record_actions">
+   <ul class="record_actions">
+       <li>
+           <a href="mailto:{{entity.utilisateurCreateur.email}}">Contacter</a>
+       </li>
     <li>
         <a href="{{ path('stage') }}">
             Retour
