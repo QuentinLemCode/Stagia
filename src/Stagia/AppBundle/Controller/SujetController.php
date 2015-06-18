@@ -39,11 +39,13 @@ class SujetController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid() && !empty($this->getUser())) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setUtilisateurCreateur($this->getUser());
+            $entity->setDateCreation(new \DateTime);
             $em->persist($entity);
             $em->flush();
-
+            $this->addFlash('success', 'Sujet de mémoire enregistré !');
             return $this->redirect($this->generateUrl('sujet_show', array('id' => $entity->getId())));
         }
 
@@ -66,9 +68,6 @@ class SujetController extends Controller
             'action' => $this->generateUrl('sujet_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
         return $form;
     }
 

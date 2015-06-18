@@ -15,10 +15,16 @@ class SujetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('description')
-            ->add('date_creation')
-            ->add('validation')
+            ->add('nom', null, array(
+                'label' => 'Sujet : '
+            ))
+            ->add('description', null, array(
+                'label' => 'Description : '
+            ))   
+            ->add('sauvegarder','submit', array(
+                'label' => 'Enregistrer',
+                'icon' => 'save'
+            ))
         ;
     }
     
