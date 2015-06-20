@@ -98,7 +98,7 @@ class Commentaire
      *
      * @return Commentaire
      */
-    public function setUtilisateurCreateur(\Stagia\AppBundle\Entity\Utilisateur $utilisateurCreateur)
+    public function setUtilisateurCreateur(\Stagia\UtilisateurBundle\Entity\Utilisateur $utilisateurCreateur)
     {
         $this->utilisateur_createur = $utilisateurCreateur;
 

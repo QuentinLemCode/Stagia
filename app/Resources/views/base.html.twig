@@ -4,6 +4,7 @@
     {% block head_style %}
         {% stylesheets filter="cssrewrite,lessphp"
             '@StagiaAppBundle/Resources/public/less/bootstrap.less'
+            '@StagiaAppBundle/Resources/public/css/stagia.css'
         %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
@@ -28,4 +29,14 @@
     {% endblock %}
 
     {% block footer %} Stagia - 2015 {% endblock %}
+    
+    {% block foot_script_assetic %}
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock foot_script_assetic %}
     

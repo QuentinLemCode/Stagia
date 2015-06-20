@@ -30,4 +30,4 @@ Stagia\AppBundle\Entity\Commentaire:
                 name: sujet_id
                 referencedColumnName: id
                 nullable: false
-            
+            cascade: ["persist"]

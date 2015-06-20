@@ -6,10 +6,6 @@ commentaire_show:
     path:     /{id}/Afficher
     defaults: { _controller: "StagiaAppBundle:Commentaire:show" }
 
-commentaire_new:
-    path:     /Nouveau
-    defaults: { _controller: "StagiaAppBundle:Commentaire:new" }
-
 commentaire_create:
     path:     /Creer
     defaults: { _controller: "StagiaAppBundle:Commentaire:create" }
@@ -28,3 +24,8 @@ commentaire_delete:
     path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Commentaire:delete" }
     methods:  [POST, DELETE]
+
+commentaire_post:
+    path:   /NouveauCommentaire/{sujet_id}
+    defaults: { _controller: "StagiaAppBundle:Commentaire:post" }
+    methods:  [POST, PUT]

@@ -50,6 +50,7 @@ class StageType extends AbstractType
             ))
             ->add('conventionDeStage', 'choice', array(
                 'choices' => array(true => 'Oui', false => 'Non'),
+                'expanded' => true,
                 'label' => 'Convention de stage obligatoire ?'
             ))
             ->add('sauvegarder','submit', array(
