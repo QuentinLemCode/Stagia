@@ -17,10 +17,6 @@ use Stagia\AppBundle\Form\CommentaireType;
 class SujetController extends Controller
 {
 
-    /**
-     * Lists all Sujet entities.
-     *
-     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -31,17 +27,18 @@ class SujetController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Sujet entity.
-     *
-     */
     public function createAction(Request $request)
     {
         $entity = new Sujet();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid() && !empty($this->getUser())) {
+        if(!$this->getUser())
+        {
+            throw $this->createAccessDeniedException("Vous devez être connecté pour poster un sujet");
+        }
+        
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setUtilisateurCreateur($this->getUser());
             $entity->setDateCreation(new \DateTime);
@@ -57,13 +54,6 @@ class SujetController extends Controller
         ));
     }
 
-    /**
-     * Creates a form to create a Sujet entity.
-     *
-     * @param Sujet $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
     private function createCreateForm(Sujet $entity)
     {
         $form = $this->createForm(new SujetType(), $entity, array(
@@ -73,10 +63,7 @@ class SujetController extends Controller
         return $form;
     }
 
-    /**
-     * Displays a form to create a new Sujet entity.
-     *
-     */
+    
     public function newAction()
     {
         $entity = new Sujet();
@@ -88,10 +75,6 @@ class SujetController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Sujet entity.
-     *
-     */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -123,10 +106,6 @@ class SujetController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing Sujet entity.
-     *
-     */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -147,13 +126,6 @@ class SujetController extends Controller
         ));
     }
 
-    /**
-    * Creates a form to edit a Sujet entity.
-    *
-    * @param Sujet $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
     private function createEditForm(Sujet $entity)
     {
         $form = $this->createForm(new SujetType(), $entity, array(
@@ -165,10 +137,6 @@ class SujetController extends Controller
 
         return $form;
     }
-    /**
-     * Edits an existing Sujet entity.
-     *
-     */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -195,10 +163,7 @@ class SujetController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    /**
-     * Deletes a Sujet entity.
-     *
-     */
+
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
@@ -219,19 +184,13 @@ class SujetController extends Controller
         return $this->redirect($this->generateUrl('sujet'));
     }
 
-    /**
-     * Creates a form to delete a Sujet entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('sujet_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Delete', 'icon' => 'trash'))
             ->getForm()
         ;
     }

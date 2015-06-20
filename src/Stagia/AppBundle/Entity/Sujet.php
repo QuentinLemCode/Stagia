@@ -32,9 +32,12 @@ class Sujet
      */
     private $validation = false;
     
-    public function __constructor()
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        $this->date_creation = new \DateTime();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -153,13 +156,7 @@ class Sujet
      */
     private $utilisateur_createur;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Add commentaire
@@ -217,20 +214,5 @@ class Sujet
     public function getUtilisateurCreateur()
     {
         return $this->utilisateur_createur;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $commentaire;
-
-
-    /**
-     * Get commentaire
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCommentaire()
-    {
-        return $this->commentaire;
     }
 }
