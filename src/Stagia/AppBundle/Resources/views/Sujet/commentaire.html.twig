@@ -1,1 +1,11 @@
-{# empty Twig template #}
+<article class="commentaire" id="commentaire-{{commentaire.id}}">
+      <div class="comment-body">
+        <span class="comment-author">{{commentaire.utilisateurcreateur}}</span><span class="comment-date">{{commentaire.datecreation|date('d/m/Y H:i') }}</span>
+        <div class="comment-text">
+            <h5>{{commentaire.titre}}</h5>
+          <div class="restform">
+            <p>{{commentaire.texte}}</p>
+          </div>
+        </div>
+      </div>
+</article>

@@ -11,7 +11,16 @@
             <p>{{entity.description}}</p>
         </div>
     <p class="text-right">Publié le {{ entity.datecreation|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
-
+    <div class="comments">
+        <section>
+            {% for commentaire in commentaires %}
+                {% include "StagiaAppBundle:Sujet:commentaire.html.twig" with {'commentaire': commentaire} %}
+                {% else %}
+                    <em>Pas de commentaires</em>
+                {% endfor %}
+            {{ form(commentaireform) }}
+        </section>
+    </div>
 
         <ul class="record_actions">
     <li>
@@ -24,6 +33,8 @@
             Modifier
         </a>
     </li>
+    {% if delete_form is defined%}
     <li>{{ form(delete_form) }}</li>
+    {% endif%}
 </ul>
 {% endblock %}

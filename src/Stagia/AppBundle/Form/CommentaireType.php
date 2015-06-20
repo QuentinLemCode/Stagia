@@ -17,7 +17,6 @@ class CommentaireType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('utilisateur_createur')
             ->add('sauvegarder','submit', array(
                 'label' => 'Enregistrer',
                 'icon' => 'save'

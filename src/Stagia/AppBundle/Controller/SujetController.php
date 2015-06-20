@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Stagia\AppBundle\Entity\Sujet;
 use Stagia\AppBundle\Form\SujetType;
+use Stagia\AppBundle\Entity\Commentaire;
+use Stagia\AppBundle\Form\CommentaireType;
 
 /**
  * Sujet controller.
@@ -95,6 +97,17 @@ class SujetController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('StagiaAppBundle:Sujet')->find($id);
+        
+        $commentaires = $entity->getCommentaires();
+        
+        $commentaire = new Commentaire();
+        
+        $commentaireform = $form = $this->createForm(new CommentaireType(), $commentaire, array(
+            'action' => $this->generateUrl('commentaire_post', array(
+                'sujet_id' => $entity->getId()
+            )),
+            'method' => 'POST',
+        ));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sujet entity.');
@@ -103,6 +116,8 @@ class SujetController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('StagiaAppBundle:Sujet:show.html.twig', array(
+            'commentaireform' => $commentaireform->createView(),
+            'commentaires' => $commentaires,
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
