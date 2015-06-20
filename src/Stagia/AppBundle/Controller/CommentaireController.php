@@ -40,11 +40,7 @@ class CommentaireController extends Controller
         }
         
         
-        return $this->render('StagiaAppBundle:Sujet:show.html.twig', array(
-            'commentaireform' => $commentaireform->createView(),
-            'commentaires' => $sujet->getCommentaires(),
-            'entity'      => $sujet
-        ));
+        return $this->redirectToRoute('sujet_show', array('id' => $sujet->getId()));
         
     }
     

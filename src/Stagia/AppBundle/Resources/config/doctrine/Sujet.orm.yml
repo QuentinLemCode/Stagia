@@ -27,7 +27,7 @@ Stagia\AppBundle\Entity\Sujet:
                 default: false
                 
     oneToMany:
-        commentaire:
+        commentaires:
             targetEntity: Commentaire
             orphanRemoval: true
             mappedBy: sujet

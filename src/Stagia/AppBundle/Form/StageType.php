@@ -16,13 +16,13 @@ class StageType extends AbstractType
     {
         $builder
             ->add('titre', null, array(
-                'label' => 'Titre du stage : '
+                'label' => 'Titre du stage '
             ))
             ->add('description', null, array(
-                'label' => 'Description du stage : '
+                'label' => 'Description du stage '
             ))
             ->add('date_debut', null, array(
-                'label' => 'Date de début de stage : ',
+                'label' => 'Date de début de stage ',
                 'widget' => 'single_text',
                 'datepicker' => true,
                 'attr' => array(
@@ -31,7 +31,7 @@ class StageType extends AbstractType
             )
             ))
             ->add('date_fin', null, array(
-                'label' => 'Date de fin de stage : ',
+                'label' => 'Date de fin de stage ',
                 'widget' => 'single_text',
                 'datepicker' => true,
                 'attr' => array(
@@ -40,17 +40,18 @@ class StageType extends AbstractType
             )
             ))
             ->add('competences', null, array(
-                'label' => 'Compétences demandées : '
+                'label' => 'Compétences demandées '
             ))
             ->add('lieu', null, array(
-                'label' => 'Adresse du stage (facultatif) : '
+                'label' => 'Adresse du stage (facultatif) '
             ))
             ->add('remuneration', null, array(
-                'label' => 'Rémuneration (facultatif) : '
+                'label' => 'Rémuneration (facultatif) '
             ))
             ->add('conventionDeStage', 'choice', array(
                 'choices' => array(true => 'Oui', false => 'Non'),
                 'expanded' => true,
+                'required' => true,
                 'label' => 'Convention de stage obligatoire ?'
             ))
             ->add('sauvegarder','submit', array(

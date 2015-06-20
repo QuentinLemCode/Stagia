@@ -25,7 +25,7 @@ Stagia\AppBundle\Entity\Commentaire:
               nullable: false
         sujet:
             targetEntity: Sujet
-            inversedBy: commentaire
+            inversedBy: commentaires
             joinColumn:
                 name: sujet_id
                 referencedColumnName: id
