@@ -20,11 +20,6 @@ class Fichier
     /**
      * @var string
      */
-    private $type_fichier;
-
-    /**
-     * @var string
-     */
     private $chemin;
 
 
@@ -63,30 +58,6 @@ class Fichier
     }
 
     /**
-     * Set typeFichier
-     *
-     * @param string $typeFichier
-     *
-     * @return Fichier
-     */
-    public function setTypeFichier($typeFichier)
-    {
-        $this->type_fichier = $typeFichier;
-
-        return $this;
-    }
-
-    /**
-     * Get typeFichier
-     *
-     * @return string
-     */
-    public function getTypeFichier()
-    {
-        return $this->type_fichier;
-    }
-
-    /**
      * Set chemin
      *
      * @param string $chemin
@@ -109,33 +80,28 @@ class Fichier
     {
         return $this->chemin;
     }
-    /**
-     * @var \Stagia\AppBundle\Entity\Memoire
-     */
-    private $memoire;
 
-
-    /**
-     * Set memoire
-     *
-     * @param \Stagia\AppBundle\Entity\Memoire $memoire
-     *
-     * @return Fichier
-     */
-    public function setMemoire(\Stagia\AppBundle\Entity\Memoire $memoire = null)
+    public function getAbsolutePath()
     {
-        $this->memoire = $memoire;
-
-        return $this;
+        return null === $this->chemin ? null : $this->getUploadRootDir().'/'.$this->chemin;
     }
 
-    /**
-     * Get memoire
-     *
-     * @return \Stagia\AppBundle\Entity\Memoire
-     */
-    public function getMemoire()
+    public function getWebPath()
     {
-        return $this->memoire;
+        return null === $this->chemin ? null : $this->getUploadDir().'/'.$this->chemin;
     }
+
+    protected function getUploadRootDir()
+    {
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/documents';
+    }
+    
 }

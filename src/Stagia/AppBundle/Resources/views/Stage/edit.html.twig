@@ -5,23 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(edit_form) }}
-    {{ form_errors(edit_form) }}
-    {{ form_row(edit_form.titre) }}
-    {{ form_row(edit_form.description) }}
-    
-        {{form_row(edit_form.date_debut) }}
-        {{ form_row(edit_form.date_fin) }}
-    {{ form_end(edit_form) }}
-    
-   <ul class="record_actions">
-    <li>
-        <a href="{{ path('stage') }}">
-            Retour
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+<div class="col-lg-6">
+    <form action="{{ path('stage_update', { 'id' : stage.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+
+        <div class="form-actions">
+            <button href="{{ path('stage')}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</button>
+            <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
+            <button href="{{ path('stage_delete', {'id': stage.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
     
 {% block foot_script_assetic %}

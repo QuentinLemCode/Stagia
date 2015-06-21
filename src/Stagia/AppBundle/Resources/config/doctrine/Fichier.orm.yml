@@ -10,16 +10,6 @@ Stagia\AppBundle\Entity\Fichier:
         nom:
             type: string
             length: 255
-        type_fichier:
-            type: string
-            length: 20
         chemin:
             type: string
             length: 255
-    manyToOne:
-        memoire:
-            targetEntity: Memoire
-            inversedBy: fichier
-            joinColumn:
-              name: fichier_id
-              referencedColumnName: id

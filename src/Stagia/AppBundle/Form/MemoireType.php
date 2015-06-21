@@ -17,9 +17,7 @@ class MemoireType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('date_creation')
             ->add('annee')
-            ->add('fichier')
             ->add('sauvegarder','submit', array(
                 'label' => 'Enregistrer',
                 'icon' => 'save'

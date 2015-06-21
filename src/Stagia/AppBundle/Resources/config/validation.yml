@@ -1,0 +1,3 @@
+Stagia\AppBundle\Entity\Stage:
+  constraints:
+    - Callback : [validate]

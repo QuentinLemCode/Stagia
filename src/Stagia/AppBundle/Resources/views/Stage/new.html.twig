@@ -5,15 +5,16 @@
     Nouveau stage
 {% endblock %}
 {% block content %}
-    {{ form(form) }}
+<div class="col-lg-6">
+    <form action="{{ path('stage_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
 
-   <ul class="record_actions">
-    <li>
-        <a href="{{ path('stage') }}">
-            Retour
-        </a>
-    </li>
-</ul>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="reset" href="{{ path('stage')}}" class="btn btn-default">Retour</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
 {% block foot_script_assetic %}
 

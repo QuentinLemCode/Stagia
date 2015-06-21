@@ -156,6 +156,11 @@ class Memoire
     {
         return $this->annee;
     }
+    
+    public function getStringAnnee()
+    {
+        return (string)($this->annee - 1).'/'.(string)$this->annee;
+    }
 
     /**
      * Set fichier

@@ -1,42 +1,16 @@
 {% extends '::base.html.twig' %}
+{% block headline %}
+    Liste des mémoires
+{% endblock %}
 
-{% block content -%}
-    <h1>Memoire list</h1>
-
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Date_creation</th>
-                <th>Annee</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+{% block content %}
+    <div class="col-md-9">
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('memoire_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nom }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.annee }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('memoire_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('memoire_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
+            {% include "StagiaAppBundle:Memoire:memoire.html.twig" with {'memoire': entity} %}
+        {% else %}
+            <em>Pas de mémoires</em>
         {% endfor %}
-        </tbody>
-    </table>
-
+    </div>
         <ul>
         <li>
             <a href="{{ path('memoire_new') }}">

@@ -2,6 +2,7 @@
 
 namespace Stagia\AppBundle\Entity;
 
+use Symfony\Component\Validator\ExecutionContextInterface;
 /**
  * Stage
  */
@@ -346,5 +347,26 @@ class Stage
         $this->competences = $competences;
 
         return $this;
+    }
+    
+    public function validate(ExecutionContextInterface $context)
+    {
+        if($this->getDateDebut() != null && $this->getDateFin() != null)
+        {
+            if($this->getDateFin() < $this->getDateDebut())
+            {
+                $context->addViolationAt(
+                        'dateFin', 
+                        'La date de fin de stage ne peut pas être avant le début du stage'
+                );
+            }
+            else if($this->getDateFin() == $this->getDateDebut())
+            {
+                $context->addViolationAt(
+                        'dateFin',
+                        'La date de fin de stage ne peut pas être le même jour que le début du stage'
+                ); 
+            }
+        }
     }
 }

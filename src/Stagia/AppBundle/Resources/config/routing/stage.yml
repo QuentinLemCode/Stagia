@@ -27,4 +27,3 @@ stage_update:
 stage_delete:
     path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Stage:delete" }
-    methods:  [POST, DELETE]
