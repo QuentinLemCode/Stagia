@@ -23,11 +23,10 @@ Stagia\AppBundle\Entity\Memoire:
             nullable: false
         annee:
             type: integer
-    oneToMany:
+    oneToOne:
         fichier:
             targetEntity: \Stagia\AppBundle\Entity\Fichier
             orphanRemoval: true
-            mappedBy: memoire
             cascade: [ persist ]
     manyToOne:
         utilisateur_createur:

@@ -46,17 +46,16 @@ class StageType extends AbstractType
                 'label' => 'Adresse du stage (facultatif) '
             ))
             ->add('remuneration', null, array(
-                'label' => 'Rémuneration (facultatif) '
+                'label' => 'Rémuneration (facultatif) ',
+                'widget_addon_append' => array(
+                    'text' => '€'
+                )
             ))
             ->add('conventionDeStage', 'choice', array(
                 'choices' => array(true => 'Oui', false => 'Non'),
                 'expanded' => true,
                 'required' => true,
                 'label' => 'Convention de stage obligatoire ?'
-            ))
-            ->add('sauvegarder','submit', array(
-                'label' => 'Enregistrer',
-                'icon' => 'save'
             ))
         ;
     }

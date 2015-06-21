@@ -41,6 +41,8 @@ class MemoireController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setUtilisateurCreateur($this->getUser());
+            $entity->setDateCreation(new \DateTime());
             $em->persist($entity);
             $em->flush();
 

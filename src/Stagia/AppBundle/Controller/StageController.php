@@ -15,209 +15,133 @@ use Stagia\AppBundle\Form\StageType;
 class StageController extends Controller
 {
 
-    /**
-     * Lists all Stage entities.
-     *
-     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('StagiaAppBundle:Stage')->findAll();
+        $stages = $em->getRepository('StagiaAppBundle:Stage')->findAll();
 
         return $this->render('StagiaAppBundle:Stage:index.html.twig', array(
-            'entities' => $entities,
+            'stages' => $stages,
         ));
     }
-    /**
-     * Creates a new Stage entity.
-     *
-     */
+
     public function createAction(Request $request)
     {
-        $entity = new Stage();
-        $form = $this->createCreateForm($entity);
+        $stage = new Stage();
+        $form = $this->createCreateForm($stage);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setUtilisateurCreateur($this->getUser());
-            $entity->setDatePublication(new \DateTime());
-            $em->persist($entity);
+            $stage->setUtilisateurCreateur($this->getUser());
+            $stage->setDatePublication(new \DateTime());
+            $em->persist($stage);
             $em->flush();
             $this->addFlash('success', 'Annonce enregistré !');
 
-            return $this->redirect($this->generateUrl('stage_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stage_show', array('id' => $stage->getId())));
         }
 
         return $this->render('StagiaAppBundle:Stage:new.html.twig', array(
-            'entity' => $entity,
+            'stage' => $stage,
             'form'   => $form->createView(),
         ));
     }
 
-    /**
-     * Creates a form to create a Stage entity.
-     *
-     * @param Stage $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Stage $entity)
+    private function createCreateForm(Stage $stage)
     {
-        $form = $this->createForm(new StageType(), $entity, array(
-            'action' => $this->generateUrl('stage_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(new StageType(), $stage);
         return $form;
     }
 
-    /**
-     * Displays a form to create a new Stage entity.
-     *
-     */
     public function newAction()
     {
-        $entity = new Stage();
-        $form   = $this->createCreateForm($entity);
+        $stage = new Stage();
+        $form   = $this->createCreateForm($stage);
 
         return $this->render('StagiaAppBundle:Stage:new.html.twig', array(
-            'entity' => $entity,
+            'stage' => $stage,
             'form'   => $form->createView(),
         ));
     }
 
-    /**
-     * Finds and displays a Stage entity.
-     *
-     */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
+        $stage = $em->getRepository('StagiaAppBundle:Stage')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Stage entity.');
+        if (!$stage) {
+            throw $this->createNotFoundException('Stage introuvable');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('StagiaAppBundle:Stage:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'stage'      => $stage
         ));
     }
 
-    /**
-     * Displays a form to edit an existing Stage entity.
-     *
-     */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
+        $stage = $em->getRepository('StagiaAppBundle:Stage')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Stage entity.');
+        if (!$stage) {
+            throw $this->createNotFoundException('Stage introuvable');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($stage);
 
         return $this->render('StagiaAppBundle:Stage:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'stage'      => $stage,
+            'form'   => $editForm->createView(),
         ));
     }
 
-    /**
-    * Creates a form to edit a Stage entity.
-    *
-    * @param Stage $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Stage $entity)
+    private function createEditForm(Stage $stage)
     {
-        $form = $this->createForm(new StageType(), $entity, array(
-            'action' => $this->generateUrl('stage_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(new StageType(), $stage);
         return $form;
     }
-    /**
-     * Edits an existing Stage entity.
-     *
-     */
+
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
+        $stage = $em->getRepository('StagiaAppBundle:Stage')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Stage entity.');
+        if (!$stage) {
+            throw $this->createNotFoundException('Stage introuvable');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($stage);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
+            $this->addFlash('success','Stage "'.$stage->getTitre().'" modifié !');
 
-            return $this->redirect($this->generateUrl('stage_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stage_show', array('id' => $id)));
         }
 
         return $this->render('StagiaAppBundle:Stage:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'stage'      => $stage,
+            'form'   => $editForm->createView()
         ));
     }
-    /**
-     * Deletes a Stage entity.
-     *
-     */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
+        $name = $entity->getTitre();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Stage entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Stage introuvable');
         }
+        $em->remove($entity);
+        $em->flush();
+        $this->addFlash('success', 'Le stage "'.$name.'" a bien été supprimé !');
 
         return $this->redirect($this->generateUrl('stage'));
-    }
-
-    /**
-     * Creates a form to delete a Stage entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('stage_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array(
-                'label' => 'Supprimer',
-                'icon' => 'trash'))
-            ->getForm()
-        ;
     }
 }

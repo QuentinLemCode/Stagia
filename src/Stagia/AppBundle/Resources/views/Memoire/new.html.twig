@@ -1,7 +1,11 @@
 {% extends '::base.html.twig' %}
+{% form_theme form _self %}
 
+{% block headline %}
+    Nouveau mémoire
+{% endblock %}
+    
 {% block content -%}
-    <h1>Memoire creation</h1>
 
     {{ form(form) }}
 

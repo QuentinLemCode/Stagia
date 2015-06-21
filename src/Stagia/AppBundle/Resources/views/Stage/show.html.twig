@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block headline %}
-    {{ entity.titre }}
+    {{ stage.titre }}
 {% endblock %}
 
 
@@ -10,31 +10,31 @@
         <tbody>
             <tr>
                 <th>Description du stage : </th>
-                <td>{{ entity.description|raw }}</td>
+                <td>{{ stage.description|raw }}</td>
             </tr>
             <tr>
                 <th>Date de début</th>
-                <td>{{ entity.datedebut|date('d-m-Y') }}</td>
+                <td>{{ stage.datedebut|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Date de fin</th>
-                <td>{{ entity.datefin|date('d-m-Y') }}</td>
+                <td>{{ stage.datefin|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Compétences demandés : </th>
-                <td>{{ entity.competences}}</td>
+                <td>{{ stage.competences}}</td>
             </tr>
             <tr>
                 <th>Lieu</th>
-                <td>{{ entity.lieu }}</td>
+                <td>{{ stage.lieu }}</td>
             </tr>
             <tr>
                 <th>Remuneration</th>
-                <td>{{ entity.remuneration }} €</td>
+                <td>{{ stage.remuneration }} €</td>
             </tr>
             <tr>
                 <th>Convention de stage : </th>
-                {% if entity.conventionDeStage %}
+                {% if stage.conventionDeStage %}
                     <td>Obligatoire</td>
                 {% else %}
                     <td>Facultatif</td>
@@ -42,22 +42,16 @@
             </tr>
         </tbody>
     </table>
-<p class="text-right"> Publié le {{ entity.datepublication|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
+<p class="text-right"> Publié le {{ stage.datepublication|date('d-m-Y H:i') }} par {{ stage.utilisateurCreateur }} </p>
 
    <ul class="record_actions">
        <li>
-           <a href="mailto:{{entity.utilisateurCreateur.email}}">Contacter</a>
+           <a href="mailto:{{stage.utilisateurCreateur.email}}">Contacter</a>
        </li>
     <li>
         <a href="{{ path('stage') }}">
             Retour
         </a>
     </li>
-   {# <li>
-        <a href="{{ path('stage_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>#}
 </ul>
 {% endblock %}

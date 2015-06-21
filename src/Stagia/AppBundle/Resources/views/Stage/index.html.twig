@@ -5,8 +5,10 @@
 
 {% block content %}
     <div class="col-md-9">
-        {% for entity in entities %}
-            {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': entity} %}
+        {% for stage in stages %}
+            {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': stage} %}
+        {% else %}
+            <em>Pas de stages</em>
         {% endfor %}
     </div>
     <aside>
