@@ -132,13 +132,13 @@ class StageController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('StagiaAppBundle:Stage')->find($id);
-        $name = $entity->getTitre();
+        $stage = $em->getRepository('StagiaAppBundle:Stage')->find($id);
+        $name = $stage->getTitre();
 
-        if (!$entity) {
+        if (!$stage) {
             throw $this->createNotFoundException('Stage introuvable');
         }
-        $em->remove($entity);
+        $em->remove($stage);
         $em->flush();
         $this->addFlash('success', 'Le stage "'.$name.'" a bien été supprimé !');
 

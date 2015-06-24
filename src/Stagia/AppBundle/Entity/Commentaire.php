@@ -15,17 +15,23 @@ class Commentaire
     /**
      * @var string
      */
-    private $titre;
-
-    /**
-     * @var string
-     */
     private $texte;
+    
+    /**
+     * @var \Stagia\AppBundle\Entity\Sujet
+     */
+    private $sujet;
 
     /**
      * @var \Stagia\AppBundle\Entity\Utilisateur
      */
     private $utilisateur_createur;
+    
+    /**
+     * @var \DateTime
+     */
+    private $date_creation;
+
     
     public function __constructor()
     {
@@ -41,30 +47,6 @@ class Commentaire
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Commentaire
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
     }
 
     /**
@@ -114,17 +96,6 @@ class Commentaire
     {
         return $this->utilisateur_createur;
     }
-    /**
-     * @var \Stagia\UtilisateurBundle\Entity\Utilisateur
-     */
-    private $utilisateurcreateur;
-
-
-    /**
-     * @var \Stagia\AppBundle\Entity\Sujet
-     */
-    private $sujet;
-
 
     /**
      * Set sujet
@@ -149,12 +120,6 @@ class Commentaire
     {
         return $this->sujet;
     }
-    /**
-     * @var \DateTime
-     */
-    private $date_creation;
-
-
     /**
      * Set dateCreation
      *

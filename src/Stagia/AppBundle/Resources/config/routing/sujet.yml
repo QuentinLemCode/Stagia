@@ -27,4 +27,3 @@ sujet_update:
 sujet_delete:
     path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Sujet:delete" }
-    methods:  [POST, DELETE]

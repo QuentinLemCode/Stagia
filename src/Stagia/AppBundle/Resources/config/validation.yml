@@ -1,3 +1,10 @@
 Stagia\AppBundle\Entity\Stage:
   constraints:
     - Callback : [validate]
+    
+Stagia\AppBundle\Entity\Commentaire:
+  properties:
+    texte:
+      - NotBlank:
+         message: "Le commentaire ne peut pas être vide !"
+    

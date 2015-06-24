@@ -45,7 +45,7 @@ class Utilisateur extends BaseUser
     private $ville;
 
     /**
-     * @var number
+     * @var string
      */
     private $telephone;
 
@@ -221,11 +221,11 @@ class Utilisateur extends BaseUser
     /**
      * Set telephone
      *
-     * @param \number $telephone
+     * @param \string $telephone
      *
      * @return Utilisateur
      */
-    public function setTelephone(\number $telephone)
+    public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
 
@@ -235,7 +235,7 @@ class Utilisateur extends BaseUser
     /**
      * Get telephone
      *
-     * @return \number
+     * @return \string
      */
     public function getTelephone()
     {

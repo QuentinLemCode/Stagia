@@ -7,12 +7,9 @@ Stagia\AppBundle\Entity\Commentaire:
             generator:
                 strategy: AUTO
     fields:
-        titre:
-            type: string
-            length: 100
-            nullable: false
         texte:
             type: text
+            length: 6000
         date_creation:
             type: datetime
     manyToOne:

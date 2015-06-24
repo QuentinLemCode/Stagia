@@ -45,7 +45,8 @@ Stagia\UtilisateurBundle\Entity\Utilisateur:
             options:
                 default: null
         telephone:
-            type: string(20)
+            type: string
+            length: 20
             nullable: true
             options:
                 default: null
