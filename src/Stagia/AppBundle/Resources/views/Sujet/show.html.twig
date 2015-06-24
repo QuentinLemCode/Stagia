@@ -11,30 +11,22 @@
             <p>{{entity.description}}</p>
         </div>
     <p class="text-right">Publié le {{ entity.datecreation|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
-    <div class="comments">
-        <section>
+    <section class="col-md-12 col-sm-12 comments">
+        <header>
+            <h2>Commentaires</h2>
+        </header>
             {% for commentaire in commentaires %}
                 {% include "StagiaAppBundle:Sujet:commentaire.html.twig" with {'commentaire': commentaire} %}
-                {% else %}
-                    <em>Pas de commentaires</em>
-                {% endfor %}
-            {{ form(commentaireform) }}
-        </section>
-    </div>
+            {% else %}
+                <em>Pas de commentaires</em>
+            {% endfor %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('sujet') }}">
-            Retour
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('sujet_edit', { 'id': entity.id }) }}">
-            Modifier
-        </a>
-    </li>
-    {% if delete_form is defined%}
-    <li>{{ form(delete_form) }}</li>
-    {% endif%}
-</ul>
+        {% if app.user %}
+            {% include "StagiaAppBundle:Sujet:commentaireform.html.twig" with {'form': commentaireform, 'sujet_id': entity.id} %}
+        {% endif %}
+    </section>
+
+    <button class="btn btn-primary" href="{{ path('sujet') }}" >{{icon('chevron-left')}} Retour</button>
+    <button class="btn btn-default" href="{{ path('sujet_edit', { 'id': entity.id } )}}">{{icon('pencil')}} Modifier</button>
+    <button class="btn btn-danger" href="{{ path('sujet_delete', { 'id': entity.id } )}}">{{icon('trash')}} Supprimer</button>
 {% endblock %}

@@ -95,14 +95,10 @@ class SujetController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sujet entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('StagiaAppBundle:Sujet:show.html.twig', array(
             'commentaireform' => $commentaireform->createView(),
             'commentaires' => $commentaires,
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'entity'      => $entity
         ));
     }
 
@@ -117,12 +113,10 @@ class SujetController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('StagiaAppBundle:Sujet:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView()
         ));
     }
 
@@ -146,8 +140,6 @@ class SujetController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sujet entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -159,39 +151,23 @@ class SujetController extends Controller
 
         return $this->render('StagiaAppBundle:Sujet:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView()
         ));
     }
 
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $sujet = $em->getRepository('StagiaAppBundle:Sujet')->find($id);
+        $name = $sujet->getNom();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('StagiaAppBundle:Sujet')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Sujet entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$sujet) {
+            throw $this->createNotFoundException('Sujet introuvable');
         }
+        $em->remove($sujet);
+        $em->flush();
+        $this->addFlash('success', 'Le sujet de mémoire "'.$name.'" a bien été supprimé !');
 
         return $this->redirect($this->generateUrl('sujet'));
-    }
-
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('sujet_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete', 'icon' => 'trash'))
-            ->getForm()
-        ;
     }
 }

@@ -1,7 +1,9 @@
 {% extends '::base.html.twig' %}
+{% form_theme form _self %}
+{% block title %}Sujet de mémoire{% endblock %}
+{% block headline %}Création d'un sujet de mémoire{% endblock %}
 
 {% block content -%}
-    <h1>Sujet creation</h1>
 
     {{ form(form) }}
 
