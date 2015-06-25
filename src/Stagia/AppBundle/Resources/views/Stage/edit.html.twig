@@ -10,9 +10,9 @@
         {{ form_widget(form) }}
 
         <div class="form-actions">
-            <button href="{{ path('stage')}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</button>
+            <a href="{{ path('stage')}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</a>
             <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
-            <button href="{{ path('stage_delete', {'id': stage.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</button>
+            <a href="{{ path('stage_delete', {'id': stage.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</a>
         </div>
     </form>
 </div>
