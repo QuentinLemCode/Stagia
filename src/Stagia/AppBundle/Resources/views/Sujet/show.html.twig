@@ -27,6 +27,8 @@
     </section>
 
     <button class="btn btn-primary" href="{{ path('sujet') }}" >{{icon('chevron-left')}} Retour</button>
+    {% if app.user == entity.utilisateurCreateur %}
     <button class="btn btn-default" href="{{ path('sujet_edit', { 'id': entity.id } )}}">{{icon('pencil')}} Modifier</button>
     <button class="btn btn-danger" href="{{ path('sujet_delete', { 'id': entity.id } )}}">{{icon('trash')}} Supprimer</button>
+    {% endif %}
 {% endblock %}
