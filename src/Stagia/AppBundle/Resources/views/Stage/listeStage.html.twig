@@ -1,0 +1,7 @@
+<div class="col-md-8">
+    {% for stage in stages %}
+        {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': stage} %}
+    {% else %}
+        <em>Pas de stages</em>
+    {% endfor %}
+</div>

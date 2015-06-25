@@ -144,4 +144,32 @@ class StageController extends Controller
 
         return $this->redirect($this->generateUrl('stage'));
     }
+    
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if(!$request->isXmlHttpRequest()) {
+            return $this->redirect($this->generateUrl('stage'));
+        }
+        $recherche = $request->get('recherche');
+        $stages = null;
+        if($recherche)
+        {
+           $qb = $em->createQueryBuilder();
+
+           $qb->select('s')
+              ->from('StagiaAppBundle:Stage', 's')
+              ->where("s.titre LIKE :recherche ")
+              ->orderBy('s.titre', 'ASC')
+              ->setParameter('recherche', '%'.$recherche.'%');
+
+           $query = $qb->getQuery();              
+           $stages = $query->getResult();
+        }
+        else
+        {
+            $stages = $em->getRepository('StagiaAppBundle:Stage')->findAll();
+        }
+        return $this->render('StagiaAppBundle:Stage:listeStage.html.twig', array('stages' => $stages)); 
+    }
 }

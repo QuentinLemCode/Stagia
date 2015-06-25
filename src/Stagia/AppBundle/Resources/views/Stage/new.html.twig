@@ -10,8 +10,8 @@
         {{ form_widget(form) }}
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            <button type="reset" href="{{ path('stage')}}" class="btn btn-default">Retour</button>
+            <button type="submit" class="btn btn-primary">{{icon('save') }} Enregistrer</button>
+            <a href="{{ path('stage')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
         </div>
     </form>
 </div>
