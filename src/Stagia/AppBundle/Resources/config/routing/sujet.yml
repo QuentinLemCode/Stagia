@@ -1,0 +1,29 @@
+sujet:
+    path:     /
+    defaults: { _controller: "StagiaAppBundle:Sujet:index" }
+
+sujet_show:
+    path:     /{id}/Afficher
+    defaults: { _controller: "StagiaAppBundle:Sujet:show" }
+
+sujet_new:
+    path:     /Nouveau
+    defaults: { _controller: "StagiaAppBundle:Sujet:new" }
+
+sujet_create:
+    path:     /Creer
+    defaults: { _controller: "StagiaAppBundle:Sujet:create" }
+    methods:  POST
+
+sujet_edit:
+    path:     /{id}/Modifier
+    defaults: { _controller: "StagiaAppBundle:Sujet:edit" }
+
+sujet_update:
+    path:     /{id}/MisAJour
+    defaults: { _controller: "StagiaAppBundle:Sujet:update" }
+    methods:  [POST, PUT]
+
+sujet_delete:
+    path:     /{id}/Supprimer
+    defaults: { _controller: "StagiaAppBundle:Sujet:delete" }

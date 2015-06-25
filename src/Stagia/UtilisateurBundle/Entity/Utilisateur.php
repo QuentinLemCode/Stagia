@@ -1,6 +1,4 @@
 <?php
-// src/Acme/UserBundle/Entity/User.php
-
 namespace Stagia\UtilisateurBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
@@ -47,7 +45,7 @@ class Utilisateur extends BaseUser
     private $ville;
 
     /**
-     * @var number
+     * @var string
      */
     private $telephone;
 
@@ -223,11 +221,11 @@ class Utilisateur extends BaseUser
     /**
      * Set telephone
      *
-     * @param \number $telephone
+     * @param \string $telephone
      *
      * @return Utilisateur
      */
-    public function setTelephone(\number $telephone)
+    public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
 
@@ -237,10 +235,166 @@ class Utilisateur extends BaseUser
     /**
      * Get telephone
      *
-     * @return \number
+     * @return \string
      */
     public function getTelephone()
     {
         return $this->telephone;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $stage;
+
+
+    /**
+     * Add stage
+     *
+     * @param \Stagia\AppBundle\Entity\Stage $stage
+     *
+     * @return Utilisateur
+     */
+    public function addStage(\Stagia\AppBundle\Entity\Stage $stage)
+    {
+        $this->stage[] = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Remove stage
+     *
+     * @param \Stagia\AppBundle\Entity\Stage $stage
+     */
+    public function removeStage(\Stagia\AppBundle\Entity\Stage $stage)
+    {
+        $this->stage->removeElement($stage);
+    }
+
+    /**
+     * Get stage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStage()
+    {
+        return $this->stage;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $commentaire;
+
+
+    /**
+     * Add commentaire
+     *
+     * @param \Stagia\AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Utilisateur
+     */
+    public function addCommentaire(\Stagia\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \Stagia\AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\Stagia\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $memoire;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $sujet;
+
+
+    /**
+     * Add memoire
+     *
+     * @param \Stagia\AppBundle\Entity\Memoire $memoire
+     *
+     * @return Utilisateur
+     */
+    public function addMemoire(\Stagia\AppBundle\Entity\Memoire $memoire)
+    {
+        $this->memoire[] = $memoire;
+
+        return $this;
+    }
+
+    /**
+     * Remove memoire
+     *
+     * @param \Stagia\AppBundle\Entity\Memoire $memoire
+     */
+    public function removeMemoire(\Stagia\AppBundle\Entity\Memoire $memoire)
+    {
+        $this->memoire->removeElement($memoire);
+    }
+
+    /**
+     * Get memoire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemoire()
+    {
+        return $this->memoire;
+    }
+
+    /**
+     * Add sujet
+     *
+     * @param \Stagia\AppBundle\Entity\Sujet $sujet
+     *
+     * @return Utilisateur
+     */
+    public function addSujet(\Stagia\AppBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet[] = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Remove sujet
+     *
+     * @param \Stagia\AppBundle\Entity\Sujet $sujet
+     */
+    public function removeSujet(\Stagia\AppBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet->removeElement($sujet);
+    }
+
+    /**
+     * Get sujet
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
     }
 }

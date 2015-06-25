@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+{% form_theme form _self %}
+
+{% block headline %}
+    Nouveau mémoire
+{% endblock %}
+    
+{% block content -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('memoire') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
