@@ -43,3 +43,10 @@ UPGRADE.md
 app/SymfonyRequirements.php
 /nbproject/private/
 nbproject/
+web/css/*
+web/js/*
+web/fonts/*
+web/bundles/*
+app/check.php
+app/SymfonyRequirements.php
+.idea/*

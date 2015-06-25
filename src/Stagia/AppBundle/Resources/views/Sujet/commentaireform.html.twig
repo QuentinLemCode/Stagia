@@ -1,0 +1,10 @@
+{% form_theme form _self %}
+<form action="{{ path('commentaire_post', { 'sujet_id': sujet_id } ) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+    <div class="col-md-6">
+        {{ form_row(form.texte) }}
+    </div>
+    <div class="col-md-6 form-actions">
+        <button type="submit" class="btn btn-default">Envoyer</button>
+    </div>
+        {{ form_rest(form) }}
+</form>

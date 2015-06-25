@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+{% block title %}Sujet de mémoire{% endblock %}
+{% block headline %}Liste des sujets de mémoire{% endblock %}
+{% block content -%}
+    <div class="col-md-9">
+        {% for entity in entities %}
+            {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': entity} %}
+        {% endfor %}
+    </div>
+    <aside>
+        <div class="col-md-3 well">
+            <div class="row">
+                <input placeholder="Rechercher" />
+            </div>
+            <hr></hr>
+            <div class="row">
+                <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau sujet</a>
+            </div>
+        </div>
+    </aside>
+    {% endblock %}
