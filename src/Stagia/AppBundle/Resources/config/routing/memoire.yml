@@ -1,0 +1,30 @@
+memoire:
+    path:     /
+    defaults: { _controller: "StagiaAppBundle:Memoire:index" }
+
+memoire_show:
+    path:     /{id}/Afficher
+    defaults: { _controller: "StagiaAppBundle:Memoire:show" }
+
+memoire_new:
+    path:     /Nouveau
+    defaults: { _controller: "StagiaAppBundle:Memoire:new" }
+
+memoire_create:
+    path:     /Creer
+    defaults: { _controller: "StagiaAppBundle:Memoire:create" }
+    methods:  POST
+
+memoire_edit:
+    path:     /{id}/Modifier
+    defaults: { _controller: "StagiaAppBundle:Memoire:edit" }
+
+memoire_update:
+    path:     /{id}/MisAJour
+    defaults: { _controller: "StagiaAppBundle:Memoire:update" }
+    methods:  [POST, PUT]
+
+memoire_delete:
+    path:     /{id}/Supprimer
+    defaults: { _controller: "StagiaAppBundle:Memoire:delete" }
+    methods:  [POST, DELETE]

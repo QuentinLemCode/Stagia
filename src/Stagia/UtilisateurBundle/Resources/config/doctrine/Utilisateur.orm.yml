@@ -1,0 +1,83 @@
+Stagia\UtilisateurBundle\Entity\Utilisateur:
+    type:  entity
+    table: fos_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 60
+            nullable: true
+            options:
+                default: null
+        prenom:
+            type: string
+            nullable: true
+            length: 60
+            options:
+                default: null       
+        rue:
+            type: string
+            nullable: true
+            options:
+                default: null
+        adresse1:
+            type: string
+            nullable: true
+            options:
+                default: null
+        adresse2:
+            type: string
+            nullable: true
+            options:
+                default: null
+        codepostal:
+            type: string
+            nullable: true
+            options: 
+                default: null
+        ville:
+            type: string
+            nullable: true
+            options:
+                default: null
+        telephone:
+            type: string
+            length: 20
+            nullable: true
+            options:
+                default: null
+    oneToMany:
+        stage:
+            targetEntity: Stagia\AppBundle\Entity\Stage
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            orderBy:
+              date_publication: ASC
+            cascade: [ persist ]
+        commentaire:
+            targetEntity: Stagia\AppBundle\Entity\Commentaire
+            orphanRemoval: false
+            mappedBy: utilisateur_createur
+            orderBy:
+              date_creation: ASC
+            cascade: [ persist ]
+        memoire:
+            targetEntity: Stagia\AppBundle\Entity\Memoire
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            cascade: [ persist ]
+            orderBy:
+              date_creation: ASC
+        sujet:
+            targetEntity: Stagia\AppBundle\Entity\Sujet
+            orphanRemoval: true
+            mappedBy: utilisateur_createur
+            cascade: [ persist ]
+            orderBy:
+              date_creation: ASC
+        
+            

@@ -1,0 +1,12 @@
+<article class="commentaire" id="commentaire-{{commentaire.id}}">
+    <header>
+        <span class="comment-author">{{commentaire.utilisateurcreateur}}</span> - <span class="comment-date">{{commentaire.datecreation|date('d/m/Y H:i') }}</span>
+    </header>
+      <div class="comment-body">
+        <div class="comment-text">
+          <div class="restform">
+            <p>{{commentaire.texte}}</p>
+          </div>
+        </div>
+      </div>
+</article>
