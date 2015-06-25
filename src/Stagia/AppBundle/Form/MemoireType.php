@@ -18,6 +18,9 @@ class MemoireType extends AbstractType
             ->add('nom')
             ->add('description')
             ->add('annee')
+            ->add('file', null, array(
+                'label' => 'Fichier'
+            ))
             ->add('sauvegarder','submit', array(
                 'label' => 'Enregistrer',
                 'icon' => 'save'

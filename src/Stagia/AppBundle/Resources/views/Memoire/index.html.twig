@@ -12,18 +12,24 @@
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Année</th>
-                        <th>Télécharger</th>
+                        <th>Fichier</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        {% for entity in entities %}
+                    {% for entity in entities %}
+                        <tr>
                             <td>{{entity.nom}}</td>
                             <td>{{entity.description}}</td>
-                            <td>{{entity.annee}}</td>
-                            <td>download</td>
-                        {% endfor %}
-                    </tr>
+                            <td>{{entity.StringAnnee}}</td>
+                            <td>
+                                {% if entity.getWebPath() != null %}
+                                    <a href="{{entity.getWebPath()}}" >{{icon('file-pdf-o')}} Télécharger</a>
+                                {% else %}
+                                    Pas de fichier
+                                {% endif %}
+                            </td
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         {% else %}
