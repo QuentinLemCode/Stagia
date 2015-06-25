@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+{% block headline %}
+    Liste des stages
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9">
+        {% for stage in stages %}
+            {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': stage} %}
+        {% else %}
+            <em>Pas de stages</em>
+        {% endfor %}
+    </div>
+    <aside>
+        <div class="col-md-3">
+            <input placeholder="Rechercher" />
+            <a class="btn btn-default" href="{{ path('stage_new') }}" role="button">Créer un nouveau stage</a>
+        </div>
+    </aside>
+    {% endblock %}

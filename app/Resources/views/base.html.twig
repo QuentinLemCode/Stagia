@@ -1,13 +1,42 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
+
+
+    {% block head_style %}
+        {% stylesheets filter="cssrewrite,lessphp"
+            '@StagiaAppBundle/Resources/public/less/bootstrap.less'
+            '@StagiaAppBundle/Resources/public/css/stagia.css'
+        %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+            <link href="/Stagia/web/css/glyphicons.css" type="text/css" rel="stylesheet" media="screen" />
+    {% endblock head_style %}
+
+    {% block navbar %}
+        {% include "StagiaAppBundle:Menu:menu.html.twig" %}
+    {% endblock %}
+            
+    {% block content_row %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+            
+    {% block headline %}
+            Stagia
+    {% endblock %}
+
+    {% block footer %} Stagia - 2015 {% endblock %}
+    
+    {% block foot_script_assetic %}
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock foot_script_assetic %}
+    

@@ -1,0 +1,9 @@
+{% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, staticTop: false } %}
+    {% block brand %}
+        <a class="navbar-brand" href="{{path('accueil')}}">Stagia</a>
+    {% endblock %}
+
+    {% block menu %}
+        {{ mopa_bootstrap_menu('main') }}
+    {% endblock %}
+{% endembed %}

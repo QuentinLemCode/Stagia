@@ -1,3 +1,7 @@
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
+stagia_utilisateur:
+    resource: "@StagiaUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /
+
+stagia_app:
+    resource: "@StagiaAppBundle/Resources/config/routing.yml"
+    prefix:   /
