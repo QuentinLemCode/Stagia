@@ -4,7 +4,6 @@ namespace Stagia\AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class MenuBuilder
 {
@@ -19,11 +18,11 @@ class MenuBuilder
      * @param \Knp\Menu\FactoryInterface $factory
      * 
      */
-    public function __construct(FactoryInterface $factory, ContainerInterface $container,SecurityContextInterface $securityContext)
+    public function __construct(FactoryInterface $factory, ContainerInterface $container)
     {
         $this->factory = $factory;
         $this->container = $container;
-        $this->securityContext = $securityContext;
+        $this->securityContext = $this->container->get('security.context');
         $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
 
 
@@ -47,10 +46,18 @@ class MenuBuilder
             'icon' => 'compass',
             'route' => 'sujet'
         ));
+        
+        //Menu utilisateurs
         if ($this->isLoggedIn) {
-            $menu->addChild('Deconnexion', array(
-                'icon' => 'compass',
-                'route' => 'fos_user_security_logout'));
+            $menuUtilisateur = $menu->addChild(
+                $this->securityContext->getToken()->getUser(), array(
+                    'dropdown' => true,
+                    'caret' => true,
+                    'icon' => 'user'
+                    ));
+            $menuUtilisateur->addChild('Mon compte', array('route' => 'fos_user_profile_show'));
+            $menuUtilisateur->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
+                    
         } else {
             $menu->addChild('Connexion', array(
                 'icon' => 'user',
@@ -59,6 +66,7 @@ class MenuBuilder
                 'icon' => 'plus',
                 'route' => 'fos_user_registration_register'));
         }
+        
         return $menu;
     }
 
