@@ -4,7 +4,7 @@ parameters:
 services:
   stagia.appbundle.menu.menu_builder:
     class: %stagia.appbundle.menu.menu.builder.class%
-    arguments: ["@knp_menu.factory","@service_container"]
+    arguments: ["@knp_menu.factory","@service_container","@security.context"]
 
   stagia.appbundle.menu.main:
     class: Knp\Menu\MenuItem

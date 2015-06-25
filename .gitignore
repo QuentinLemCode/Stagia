@@ -49,3 +49,4 @@ web/fonts/*
 web/bundles/*
 app/check.php
 app/SymfonyRequirements.php
+.idea/*
