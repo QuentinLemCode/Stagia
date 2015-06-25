@@ -8,3 +8,11 @@ Stagia\AppBundle\Entity\Commentaire:
       - NotBlank:
          message: "Le commentaire ne peut pas être vide !"
     
+Stagia\AppBundle\Entity\Memoire:
+    properties:
+        file:
+            - File:
+                maxSize: 20M
+                maxSizeMessage: Le taille maximum du fichier est de 20Mo
+                mimeTypes: [application/pdf, application/x-pdf]
+                mimeTypesMessage: Choisissez un fichier PDF valide

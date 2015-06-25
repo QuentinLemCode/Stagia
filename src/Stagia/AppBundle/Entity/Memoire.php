@@ -33,15 +33,22 @@ class Memoire
     private $annee;
 
     /**
-     * @var \Stagia\AppBundle\Entity\Fichier
-     */
-    private $fichier;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $commentaires;
-
+    
+    /**
+     * @var string
+     */
+    private $cheminFichier;
+    /**
+     * Fichier
+     */
+    public $file;
+    /**
+     * Fichier
+     */
+    private $fileRemove;
     /**
      * Constructor
      */
@@ -162,29 +169,6 @@ class Memoire
         return (string)($this->annee - 1).'/'.(string)$this->annee;
     }
 
-    /**
-     * Set fichier
-     *
-     * @param \Stagia\AppBundle\Entity\Fichier $fichier
-     *
-     * @return Memoire
-     */
-    public function setFichier(\Stagia\AppBundle\Entity\Fichier $fichier = null)
-    {
-        $this->fichier = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Get fichier
-     *
-     * @return \Stagia\AppBundle\Entity\Fichier
-     */
-    public function getFichier()
-    {
-        return $this->fichier;
-    }
 
     /**
      * Add commentaire
@@ -221,29 +205,6 @@ class Memoire
     }
 
     /**
-     * Add fichier
-     *
-     * @param \Stagia\AppBundle\Entity\Fichier $fichier
-     *
-     * @return Memoire
-     */
-    public function addFichier(\Stagia\AppBundle\Entity\Fichier $fichier)
-    {
-        $this->fichier[] = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Remove fichier
-     *
-     * @param \Stagia\AppBundle\Entity\Fichier $fichier
-     */
-    public function removeFichier(\Stagia\AppBundle\Entity\Fichier $fichier)
-    {
-        $this->fichier->removeElement($fichier);
-    }
-    /**
      * @var \Stagia\UtilisateurBundle\Entity\Utilisateur
      */
     private $utilisateur_createur;
@@ -256,7 +217,7 @@ class Memoire
      *
      * @return Memoire
      */
-    public function setUtilisateurCreateur(\Stagia\UtilisateurBundle\Entity\Utilisateur $utilisateurCreateur)
+    public function setUtilisateurCreateur($utilisateurCreateur)
     {
         $this->utilisateur_createur = $utilisateurCreateur;
 
@@ -271,5 +232,69 @@ class Memoire
     public function getUtilisateurCreateur()
     {
         return $this->utilisateur_createur;
+    }
+    
+    public function getCheminFichier()
+    {
+        return $this->cheminFichier;
+    }
+    
+    public function setCheminFichier($cheminFichier = null)
+    {
+        $this->cheminFichier = $cheminFichier;
+        return $this;
+    }
+    
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            $this->cheminFichier = '.'.$this->file->guessExtension();
+        }
+    }
+    
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+        $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->file->guessExtension());
+
+        unset($this->file);
+    }
+    
+    public function preRemoveUpload()
+    {
+        $this->fileRemove = $this->getAbsolutePath();
+    }
+    
+    public function postRemoveUpload()
+    {
+        if ($this->fileRemove) {
+            unlink($this->fileRemove);
+        }
+        $this->cheminFichier = null;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->cheminFichier ? null : $this->getUploadRootDir().'/'.$this->id.$this->cheminFichier;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->cheminFichier ? null : '../../'.$this->getUploadDir().'/'.$this->id.$this->cheminFichier;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/memoires';
     }
 }

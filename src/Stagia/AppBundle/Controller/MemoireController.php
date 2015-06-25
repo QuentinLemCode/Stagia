@@ -35,22 +35,22 @@ class MemoireController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Memoire();
-        $form = $this->createCreateForm($entity);
+        $memoire = new Memoire();
+        $form = $this->createCreateForm($memoire);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setUtilisateurCreateur($this->getUser());
-            $entity->setDateCreation(new \DateTime());
-            $em->persist($entity);
+            $memoire->setUtilisateurCreateur($this->getUser());
+            $memoire->setDateCreation(new \DateTime());
+            $em->persist($memoire);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('memoire_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('memoire_show', array('id' => $memoire->getId())));
         }
 
         return $this->render('StagiaAppBundle:Memoire:new.html.twig', array(
-            'entity' => $entity,
+            'entity' => $memoire,
             'form'   => $form->createView(),
         ));
     }
@@ -58,13 +58,13 @@ class MemoireController extends Controller
     /**
      * Creates a form to create a Memoire entity.
      *
-     * @param Memoire $entity The entity
+     * @param Memoire $memoire The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Memoire $entity)
+    private function createCreateForm(Memoire $memoire)
     {
-        $form = $this->createForm(new MemoireType(), $entity, array(
+        $form = $this->createForm(new MemoireType(), $memoire, array(
             'action' => $this->generateUrl('memoire_create'),
             'method' => 'POST',
         ));
@@ -78,11 +78,11 @@ class MemoireController extends Controller
      */
     public function newAction()
     {
-        $entity = new Memoire();
-        $form   = $this->createCreateForm($entity);
+        $memoire = new Memoire();
+        $form   = $this->createCreateForm($memoire);
 
         return $this->render('StagiaAppBundle:Memoire:new.html.twig', array(
-            'entity' => $entity,
+            'entity' => $memoire,
             'form'   => $form->createView(),
         ));
     }
@@ -95,16 +95,16 @@ class MemoireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
+        $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
-        if (!$entity) {
+        if (!$memoire) {
             throw $this->createNotFoundException('Unable to find Memoire entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('StagiaAppBundle:Memoire:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $memoire,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -117,17 +117,17 @@ class MemoireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
+        $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
-        if (!$entity) {
+        if (!$memoire) {
             throw $this->createNotFoundException('Unable to find Memoire entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($memoire);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('StagiaAppBundle:Memoire:edit.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $memoire,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -136,14 +136,14 @@ class MemoireController extends Controller
     /**
     * Creates a form to edit a Memoire entity.
     *
-    * @param Memoire $entity The entity
+    * @param Memoire $memoire The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Memoire $entity)
+    private function createEditForm(Memoire $memoire)
     {
-        $form = $this->createForm(new MemoireType(), $entity, array(
-            'action' => $this->generateUrl('memoire_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new MemoireType(), $memoire, array(
+            'action' => $this->generateUrl('memoire_update', array('id' => $memoire->getId())),
             'method' => 'PUT',
         ));
 
@@ -159,14 +159,14 @@ class MemoireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
+        $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
-        if (!$entity) {
+        if (!$memoire) {
             throw $this->createNotFoundException('Unable to find Memoire entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($memoire);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -176,7 +176,7 @@ class MemoireController extends Controller
         }
 
         return $this->render('StagiaAppBundle:Memoire:edit.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $memoire,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -192,13 +192,13 @@ class MemoireController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
+            $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
-            if (!$entity) {
+            if (!$memoire) {
                 throw $this->createNotFoundException('Unable to find Memoire entity.');
             }
 
-            $em->remove($entity);
+            $em->remove($memoire);
             $em->flush();
         }
 

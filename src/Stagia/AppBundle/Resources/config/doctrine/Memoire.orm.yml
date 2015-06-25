@@ -23,11 +23,10 @@ Stagia\AppBundle\Entity\Memoire:
             nullable: false
         annee:
             type: integer
-    oneToOne:
-        fichier:
-            targetEntity: \Stagia\AppBundle\Entity\Fichier
-            orphanRemoval: true
-            cascade: [ persist ]
+        cheminFichier:
+            type: string
+            length: 255
+            nullable: true
     manyToOne:
         utilisateur_createur:
             targetEntity: Stagia\UtilisateurBundle\Entity\Utilisateur
@@ -36,6 +35,18 @@ Stagia\AppBundle\Entity\Memoire:
               name: utilisateur_createur_id
               referencedColumnName: id
               nullable: false
+    uniqueConstraints:
+        fichier:
+            columns: [ id, cheminFichier ]
+    lifecycleCallbacks:
+      prePersist: [ preUpload ]
+      preUpdate: [ preUpload ]
+      postPersist: [ upload ]
+      postUpdate: [ upload ]
+      preRemove: [ preRemoveUpload ]
+      postRemove: [ postRemoveUpload ]
+            
+        
         
     
                 
