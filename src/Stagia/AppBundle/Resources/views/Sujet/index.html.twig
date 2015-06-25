@@ -8,9 +8,14 @@
         {% endfor %}
     </div>
     <aside>
-        <div class="col-md-3">
-            <input placeholder="Rechercher" />
-            <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau sujet</a>
+        <div class="col-md-3 well">
+            <div class="row">
+                <input placeholder="Rechercher" />
+            </div>
+            <hr></hr>
+            <div class="row">
+                <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau sujet</a>
+            </div>
         </div>
     </aside>
     {% endblock %}
