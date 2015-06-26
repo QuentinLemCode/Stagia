@@ -13,3 +13,10 @@ services:
     tags:
       - { name: knp_menu.menu, alias: main}
       
+  stagia.appbundle.menu.user:
+    class: Knp\Menu\MenuItem
+    factory_service: stagia.appbundle.menu.menu_builder
+    factory_method: userMenu
+    tags:
+        - { name: knp_menu.menu, alias: user}
+      

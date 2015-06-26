@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-9">
+    <div class="col-md-8">
         {% if entities %}
             <table class="table table-striped table-hover">
                 <thead>
@@ -36,11 +36,16 @@
             <em>Pas de mémoires</em>
         {% endif %}
     </div>
-        <ul>
-        <li>
-            <a href="{{ path('memoire_new') }}">
-                Envoyer un mémoire
-            </a>
-        </li>
-    </ul>
+    
+    <aside>
+        <div class="col-md-3 well" style="margin-left:10px">
+            <div class="row">
+                <input placeholder="Rechercher" />
+            </div>
+            <hr></hr>
+            <div class="row">
+                <a class="btn btn-default" href="{{ path('memoire_new') }}" role="button">Envoyer un mémoire</a>
+            </div>
+        </div>
+    </aside>
     {% endblock %}
