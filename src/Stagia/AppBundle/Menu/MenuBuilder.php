@@ -31,8 +31,7 @@ class MenuBuilder
     public function mainMenu()
     {
     	$menu = $this->factory->createItem('root', array(
-            'navbar' => true,
-            'pull-right' => true,
+            'navbar' => true
             ));
         $menu->addChild('Stages', array(
             'icon' => 'bolt',
@@ -47,14 +46,23 @@ class MenuBuilder
             'route' => 'sujet'
         ));
         
-        //Menu utilisateurs
+        return $menu;
+    }
+    
+    public function userMenu()
+    {
+        $menu = $this->factory->createItem('user', array(
+            'navbar' => true,
+            'pull-right' => true
+        ));
         if ($this->isLoggedIn) {
             $menuUtilisateur = $menu->addChild(
                 $this->securityContext->getToken()->getUser(), array(
                     'dropdown' => true,
                     'caret' => true,
+                    'pull-right' => true,
                     'icon' => 'user'
-                    ));
+                ));
             $menuUtilisateur->addChild('Mon compte', array('route' => 'fos_user_profile_show'));
             $menuUtilisateur->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
                     
@@ -66,7 +74,6 @@ class MenuBuilder
                 'icon' => 'plus',
                 'route' => 'fos_user_registration_register'));
         }
-        
         return $menu;
     }
 

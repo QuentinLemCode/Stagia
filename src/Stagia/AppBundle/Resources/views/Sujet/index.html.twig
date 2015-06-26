@@ -2,13 +2,13 @@
 {% block title %}Sujet de mémoire{% endblock %}
 {% block headline %}Liste des sujets de mémoire{% endblock %}
 {% block content -%}
-    <div class="col-md-9">
+    <div class="col-md-8">
         {% for entity in entities %}
             {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': entity} %}
         {% endfor %}
     </div>
     <aside>
-        <div class="col-md-3 well">
+        <div class="col-md-3 well" style="margin-left:10px">
             <div class="row">
                 <input placeholder="Rechercher" />
             </div>
