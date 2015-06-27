@@ -1,4 +1,6 @@
 services:
-#    stagia_utilisateur.example:
-#        class: Stagia\UtilisateurBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    stagia_user.registration.form.type:
+        class: Stagia\UtilisateurBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: stagia_user_registration }
