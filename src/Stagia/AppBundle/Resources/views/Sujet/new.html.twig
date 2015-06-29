@@ -5,7 +5,7 @@
     Nouveau sujet de mémoire
 {% endblock %}
 {% block content %}
-<div class="col-lg-9">
+<div class="col-lg-8">
     <form action="{{ path('sujet_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 

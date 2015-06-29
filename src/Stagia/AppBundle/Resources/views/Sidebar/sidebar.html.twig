@@ -1,0 +1,21 @@
+    <aside>
+        <div class="col-md-3 well" style="margin-left:10px">
+            <div class="row">
+                <form id="form_recherche" action="{{ path(search_path) }}" method="post">
+                    <input id="recherche" name="recherche" maxlength="100" class="form-control" type="search" placeholder="Rechercher..." />
+                    <div id="loading" style="display:none"><i class="fa fa-refresh fa-spin"></i></div>
+                    <div id="resetSearch" 
+                         {% if texteRecherche is not defined %}
+                             style="display:none"
+                         {% endif %}
+                         >
+                        <button type="reset" id="buttonReset" class="btn btn-default" onclick="resetSearch()">Reinitialiser recherche</button>
+                    </div>
+                </form>
+            </div>
+            <hr></hr>
+            <div class="row">
+                <a class="btn btn-primary" href="{{ path(new_path) }}" role="button">Créer un nouveau {{type}}</a>
+            </div>
+        </div>
+    </aside>

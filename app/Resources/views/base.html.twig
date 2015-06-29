@@ -6,12 +6,13 @@
             '@StagiaAppBundle/Resources/public/less/bootstrap.less'
             '@StagiaAppBundle/Resources/public/css/stagia.css'
             '@StagiaAppBundle/Resources/public/css/theme.css'
+
         %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
             <link href="/Stagia/web/css/glyphicons.css" type="text/css" rel="stylesheet" media="screen" />
     {% endblock head_style %}
-
+ 
     {% block navbar %}
         {% include "StagiaAppBundle:Menu:menu.html.twig" %}
     {% endblock %}
