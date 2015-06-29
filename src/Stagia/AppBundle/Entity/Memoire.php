@@ -295,6 +295,14 @@ class Memoire
     
     public function getFileName()
     {
-        return $this->nom.$this->cheminFichier;
+        return htmlspecialchars(trim($this->nom)).$this->cheminFichier;
+    }
+    
+    public function isMemoireExist()
+    {
+        if($this->getCheminFichier() != null) {
+            return true;
+        }
+        return false;
     }
 }

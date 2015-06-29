@@ -9,17 +9,8 @@ use Stagia\AppBundle\Entity\Memoire;
 use Stagia\AppBundle\Form\MemoireType;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Memoire controller.
- *
- */
 class MemoireController extends Controller
 {
-
-    /**
-     * Lists all Memoire memoires.
-     *
-     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -30,10 +21,6 @@ class MemoireController extends Controller
             'memoires' => $memoires,
         ));
     }
-    /**
-     * Creates a new Memoire memoire.
-     *
-     */
     public function createAction(Request $request)
     {
         $memoire = new Memoire();
@@ -56,13 +43,6 @@ class MemoireController extends Controller
         ));
     }
 
-    /**
-     * Creates a form to create a Memoire memoire.
-     *
-     * @param Memoire $memoire The memoire
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
     private function createCreateForm(Memoire $memoire)
     {
         $form = $this->createForm(new MemoireType(), $memoire);
@@ -70,10 +50,6 @@ class MemoireController extends Controller
         return $form;
     }
 
-    /**
-     * Displays a form to create a new Memoire memoire.
-     *
-     */
     public function newAction()
     {
         $memoire = new Memoire();
@@ -85,10 +61,6 @@ class MemoireController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Memoire memoire.
-     *
-     */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -104,10 +76,6 @@ class MemoireController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing Memoire memoire.
-     *
-     */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -115,7 +83,7 @@ class MemoireController extends Controller
         $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
         if (!$memoire) {
-            throw $this->createNotFoundException('Unable to find Memoire memoire.');
+            throw $this->createNotFoundException('Memoire introuvable.');
         }
 
         $editForm = $this->createEditForm($memoire);
@@ -126,22 +94,11 @@ class MemoireController extends Controller
         ));
     }
 
-    /**
-    * Creates a form to edit a Memoire memoire.
-    *
-    * @param Memoire $memoire The memoire
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
     private function createEditForm(Memoire $memoire)
     {
         $form = $this->createForm(new MemoireType(), $memoire);
         return $form;
     }
-    /**
-     * Edits an existing Memoire memoire.
-     *
-     */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -149,13 +106,21 @@ class MemoireController extends Controller
         $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
         if (!$memoire) {
-            throw $this->createNotFoundException('Unable to find Memoire memoire.');
+            throw $this->createNotFoundException('Mémoire introuvable.');
         }
         $editForm = $this->createEditForm($memoire);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $fileUploaded = null !== $editForm['file']->getData();
+            if($fileUploaded) {
+                $memoire->file = $editForm['file']->getData();
+                $memoire->preUpload();
+            }
             $em->flush();
+            if($fileUploaded){
+                $memoire->upload();
+            }
             $this->addFlash('success', 'Mémoire modifié avec succès');
 
             return $this->redirect($this->generateUrl('memoire_show', array('id' => $id)));
@@ -166,10 +131,6 @@ class MemoireController extends Controller
             'edit_form'   => $editForm->createView()
         ));
     }
-    /**
-     * Deletes a Memoire memoire.
-     *
-     */
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -188,7 +149,33 @@ class MemoireController extends Controller
     
     public function searchAction(Request $request)
     {
-        
+        $em = $this->getDoctrine()->getManager();
+        $recherche = $request->get('recherche');
+        $memoires = null;
+        if($recherche)
+        {
+           $qb = $em->createQueryBuilder();
+
+           $qb->select('m')
+              ->from('StagiaAppBundle:Memoire', 'm')
+              ->where("m.nom LIKE :recherche ")
+              ->orderBy('m.nom', 'ASC')
+              ->setParameter('recherche', '%'.$recherche.'%');
+
+           $query = $qb->getQuery();              
+           $memoires = $query->getResult();
+        }
+        else
+        {
+            $memoires = $em->getRepository('StagiaAppBundle:Memoire')->findAll();
+        }
+        if(!$request->isXmlHttpRequest()) {
+            return $this->render('StagiaAppBundle:Memoire:index.html.twig', array(
+                'memoires' => $memoires,
+                'texteRecherche' => $recherche
+            ));
+        }
+        return $this->render('StagiaAppBundle:Memoire:listeMemoire.html.twig', array('memoires' => $memoires)); 
     }
     
     public function downloadAction($id) {
