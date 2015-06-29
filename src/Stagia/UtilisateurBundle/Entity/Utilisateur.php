@@ -2,12 +2,21 @@
 namespace Stagia\UtilisateurBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
-class Utilisateur extends BaseUser
+class Utilisateur extends BaseUser implements EquatableInterface
 {
     public function __construct()
     {
         parent::__construct();
+        if (empty($this->roles)) {
+            $this->roles[] = 'ROLE_USER';
+        }
+        $this->commentaire = new ArrayCollection();
+        $this->sujet = new ArrayCollection();
+        $this->stage = new ArrayCollection();
     }
     /**
      * @var string
@@ -397,4 +406,9 @@ class Utilisateur extends BaseUser
     {
         return $this->sujet;
     }
+
+    public function isEqualTo(UserInterface $user) {
+        return ($this->getRoles() === $user->getRoles());
+    }
+
 }
