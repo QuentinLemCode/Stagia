@@ -71,10 +71,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: gmail
+    host:      smtp.gmail.com
+    username:  stagia91@gmail.com
+    password:  Stagia91000
     spool:     { type: memory }
     
 fos_user:
@@ -84,7 +84,13 @@ fos_user:
     registration:
         form:
             type: stagia_user_registration
-
+        confirmation:
+            enabled: true #On active la confirmation par e-mail
+    from_email:
+        address: stagia91@gmail.com
+        sender_name: mostafa
+    service:
+        mailer:   fos_user.mailer.twig_swift
 mopa_bootstrap:
     form: 
       show_legend: false
