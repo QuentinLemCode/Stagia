@@ -71,8 +71,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: gmail
-    host:      smtp.gmail.com
+    transport:  gmail
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
     username:  stagia91@gmail.com
     password:  Stagia91000
     spool:     { type: memory }
@@ -85,12 +87,19 @@ fos_user:
         form:
             type: stagia_user_registration
         confirmation:
-            enabled: true #On active la confirmation par e-mail
+            enabled:    true
+            from_email:
+                address:        registration@stagia.com
+                sender_name:    stagia Registration
     from_email:
-        address: stagia91@gmail.com
-        sender_name: mostafa
-    service:
-        mailer:   fos_user.mailer.twig_swift
+        address:        noreply@stagia.com
+        sender_name:    stagia App
+    resetting:
+        email:
+            from_email:
+                address:        resetting@stagia.com
+                sender_name:    stagia Resetting
+
 mopa_bootstrap:
     form: 
       show_legend: false
