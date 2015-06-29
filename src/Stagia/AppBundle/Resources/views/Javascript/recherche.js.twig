@@ -1,0 +1,45 @@
+        <script type="text/javascript">
+        $( document ).ready(function() {
+        {% if texteRecherche is defined %}
+            $('#recherche').val("{{texteRecherche}}");
+        {% endif %}
+            
+        $("#loading").hide();
+        var timer;
+        $("#recherche").on('keyup',function(){
+            timer && clearTimeout(timer);
+            timer = setTimeout(postRecherche, 500);
+        });
+        $("#buttonReset").on('click', function(){
+            $('#recherche').val('');
+            postRecherche();
+        });
+        });               
+        function postRecherche()
+        {
+
+            $("#loading").show();
+            var query = $("#recherche").val();
+            if(query !== "")
+            {
+                $("#resetSearch").show();
+            }
+            else
+            {
+                $("#resetSearch").hide();
+            }
+            var data_form = 'recherche=' + query;
+            $.ajax({
+                type: "POST",
+                url: "{{ path(search_path)}}",
+                data: data_form,
+                cache: false,
+                success: function(data){
+                    $('#{{type}}').html(data);
+                    $("#loading").hide();
+                }
+            });
+            return false;
+        }
+        
+        </script>

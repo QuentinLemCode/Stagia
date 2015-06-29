@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Stagia\AppBundle\Entity\Memoire;
 use Stagia\AppBundle\Form\MemoireType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Memoire controller.
@@ -16,21 +17,21 @@ class MemoireController extends Controller
 {
 
     /**
-     * Lists all Memoire entities.
+     * Lists all Memoire memoires.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('StagiaAppBundle:Memoire')->findAll();
+        $memoires = $em->getRepository('StagiaAppBundle:Memoire')->findAll();
 
         return $this->render('StagiaAppBundle:Memoire:index.html.twig', array(
-            'entities' => $entities,
+            'memoires' => $memoires,
         ));
     }
     /**
-     * Creates a new Memoire entity.
+     * Creates a new Memoire memoire.
      *
      */
     public function createAction(Request $request)
@@ -45,35 +46,32 @@ class MemoireController extends Controller
             $memoire->setDateCreation(new \DateTime());
             $em->persist($memoire);
             $em->flush();
-
+            $this->addFlash('success', 'Mémoire créé avec succès !');
             return $this->redirect($this->generateUrl('memoire_show', array('id' => $memoire->getId())));
         }
 
         return $this->render('StagiaAppBundle:Memoire:new.html.twig', array(
-            'entity' => $memoire,
+            'memoire' => $memoire,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Memoire entity.
+     * Creates a form to create a Memoire memoire.
      *
-     * @param Memoire $memoire The entity
+     * @param Memoire $memoire The memoire
      *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Memoire $memoire)
     {
-        $form = $this->createForm(new MemoireType(), $memoire, array(
-            'action' => $this->generateUrl('memoire_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(new MemoireType(), $memoire);
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new Memoire entity.
+     * Displays a form to create a new Memoire memoire.
      *
      */
     public function newAction()
@@ -82,13 +80,13 @@ class MemoireController extends Controller
         $form   = $this->createCreateForm($memoire);
 
         return $this->render('StagiaAppBundle:Memoire:new.html.twig', array(
-            'entity' => $memoire,
+            'memoire' => $memoire,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Memoire entity.
+     * Finds and displays a Memoire memoire.
      *
      */
     public function showAction($id)
@@ -98,19 +96,16 @@ class MemoireController extends Controller
         $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
         if (!$memoire) {
-            throw $this->createNotFoundException('Unable to find Memoire entity.');
+            throw $this->createNotFoundException('Mémoire introuvable.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('StagiaAppBundle:Memoire:show.html.twig', array(
-            'entity'      => $memoire,
-            'delete_form' => $deleteForm->createView(),
+            'memoire'      => $memoire
         ));
     }
 
     /**
-     * Displays a form to edit an existing Memoire entity.
+     * Displays a form to edit an existing Memoire memoire.
      *
      */
     public function editAction($id)
@@ -120,39 +115,31 @@ class MemoireController extends Controller
         $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
         if (!$memoire) {
-            throw $this->createNotFoundException('Unable to find Memoire entity.');
+            throw $this->createNotFoundException('Unable to find Memoire memoire.');
         }
 
         $editForm = $this->createEditForm($memoire);
-        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('StagiaAppBundle:Memoire:edit.html.twig', array(
-            'entity'      => $memoire,
+            'memoire'      => $memoire,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Memoire entity.
+    * Creates a form to edit a Memoire memoire.
     *
-    * @param Memoire $memoire The entity
+    * @param Memoire $memoire The memoire
     *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Memoire $memoire)
     {
-        $form = $this->createForm(new MemoireType(), $memoire, array(
-            'action' => $this->generateUrl('memoire_update', array('id' => $memoire->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
+        $form = $this->createForm(new MemoireType(), $memoire);
         return $form;
     }
     /**
-     * Edits an existing Memoire entity.
+     * Edits an existing Memoire memoire.
      *
      */
     public function updateAction(Request $request, $id)
@@ -162,63 +149,61 @@ class MemoireController extends Controller
         $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
         if (!$memoire) {
-            throw $this->createNotFoundException('Unable to find Memoire entity.');
+            throw $this->createNotFoundException('Unable to find Memoire memoire.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($memoire);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Mémoire modifié avec succès');
 
-            return $this->redirect($this->generateUrl('memoire_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('memoire_show', array('id' => $id)));
         }
 
         return $this->render('StagiaAppBundle:Memoire:edit.html.twig', array(
-            'entity'      => $memoire,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'memoire'      => $memoire,
+            'edit_form'   => $editForm->createView()
         ));
     }
     /**
-     * Deletes a Memoire entity.
+     * Deletes a Memoire memoire.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
-
-            if (!$memoire) {
-                throw $this->createNotFoundException('Unable to find Memoire entity.');
-            }
-
-            $em->remove($memoire);
-            $em->flush();
+        if (!$memoire) {
+            throw $this->createNotFoundException('Mémoire introuvable');
         }
+
+        $em->remove($memoire);
+        $em->flush();
+        $this->addFlash('success', 'Mémoire supprimé avec succès');
 
         return $this->redirect($this->generateUrl('memoire'));
     }
-
-    /**
-     * Creates a form to delete a Memoire entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
+    
+    public function searchAction(Request $request)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('memoire_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        
+    }
+    
+    public function downloadAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $memoire = $em->getRepository('StagiaAppBundle:Memoire')->find($id);
+         
+        $urlFile = $memoire->getAbsolutePath();
+        $content = file_get_contents($urlFile);
+         
+        $response = new Response();
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'mime/type');
+        $response->headers->set('Content-Disposition','attachment; filename="' . $memoire->getFilename() . '"');
+         
+        $response->setContent($content);
+        return $response;
     }
 }

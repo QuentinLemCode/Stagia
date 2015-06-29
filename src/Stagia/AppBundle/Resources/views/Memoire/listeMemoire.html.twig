@@ -1,0 +1,28 @@
+    <div class="col-md-8">
+        {% if memoires %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Année</th>
+                        <th>Fichier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for memoire in memoires %}
+                        <tr>
+                            <td>{{memoire.nom}}</td>
+                            <td>{{memoire.description}}</td>
+                            <td>{{memoire.StringAnnee}}</td>
+                            <td>
+                                <a href="{{path('memoire_download', { 'id': memoire.id } )}}" >{{icon('file-pdf-o')}} Télécharger</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <em>Pas de mémoires</em>
+        {% endif %}
+    </div>

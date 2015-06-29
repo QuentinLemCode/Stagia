@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-lg-6">
+<div class="col-lg-8">
     <form action="{{ path('stage_update', { 'id' : stage.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 

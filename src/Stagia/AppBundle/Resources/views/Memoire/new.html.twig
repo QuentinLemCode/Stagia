@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
 {% form_theme form _self %}
-
+{% block title %}Création mémoire{% endblock %}
 {% block headline %}
     Nouveau mémoire
 {% endblock %}
 {% block content %}
-<div class="col-lg-6">
+<div class="col-lg-8">
     <form action="{{ path('memoire_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <div class="form-actions">

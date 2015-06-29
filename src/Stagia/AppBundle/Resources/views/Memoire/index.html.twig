@@ -1,51 +1,23 @@
 {% extends '::base.html.twig' %}
+
+{% set type = 'memoire' %}
+{% set search_path = 'memoire_search' %}
+{% set new_path = 'memoire_new' %}
+
 {% block headline %}
     Liste des mémoires
 {% endblock %}
+{% block title %}
+    Mémoire
+{% endblock %}
 
-{% block content %}
-    <div class="col-md-8">
-        {% if entities %}
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Année</th>
-                        <th>Fichier</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for entity in entities %}
-                        <tr>
-                            <td>{{entity.nom}}</td>
-                            <td>{{entity.description}}</td>
-                            <td>{{entity.StringAnnee}}</td>
-                            <td>
-                                {% if entity.getWebPath() != null %}
-                                    <a href="{{entity.getWebPath()}}" >{{icon('file-pdf-o')}} Télécharger</a>
-                                {% else %}
-                                    Pas de fichier
-                                {% endif %}
-                            </td
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <em>Pas de mémoires</em>
-        {% endif %}
+ {% block content %}
+    <div id="{{type}}">
+        {% include 'StagiaAppBundle:Memoire:listeMemoire.html.twig' %}
     </div>
-    
-    <aside>
-        <div class="col-md-3 well" style="margin-left:10px">
-            <div class="row">
-                <input placeholder="Rechercher" />
-            </div>
-            <hr></hr>
-            <div class="row">
-                <a class="btn btn-default" href="{{ path('memoire_new') }}" role="button">Envoyer un mémoire</a>
-            </div>
-        </div>
-    </aside>
+    {% include 'StagiaAppBundle:Sidebar:sidebar.html.twig' %}
     {% endblock %}
+
+{% block raw_javascript %}
+    {% include 'StagiaAppBundle:Javascript:recherche.js.twig' %}
+{% endblock %}
