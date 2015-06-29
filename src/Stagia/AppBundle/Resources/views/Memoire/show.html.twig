@@ -24,8 +24,8 @@
             <tr>
                 <th>Télécharger</th>
                 <td>
-                    {% if memoire.getWebPath() != null %}
-                        <a href="{{memoire.getWebPath()}}" >{{icon('file-pdf-o')}} Télécharger</a>
+                    {% if memoire.isMemoireExist() %}
+                       <a href="{{path('memoire_download', { 'id': memoire.id } )}}" >{{icon('file-pdf-o')}} Télécharger</a>
                     {% else %}
                         Pas de fichier
                     {% endif %}
@@ -37,7 +37,7 @@
 <p class="text-right"> Publié le {{ memoire.datecreation|date('d-m-Y H:i') }} par {{ memoire.utilisateurCreateur }} </p>
 <div class="actions">
         <a class="btn btn-default" href="{{ path('memoire') }}">{{icon('chevron-left')}} Retour</a>
-        {% if app.user == memoire.utilisateurCreateur %}
+        {% if app.user == memoire.utilisateurCreateur or is_granted('ROLE_ADMIN') %}
             <a class="btn btn-default" href="{{ path('memoire_edit', { 'id': memoire.id } )}}">{{icon('pencil')}} Modifier</a>
             <a class="btn btn-danger" href="{{ path('memoire_delete', { 'id': memoire.id } )}}">{{icon('trash')}} Supprimer</a>
         {% endif %}

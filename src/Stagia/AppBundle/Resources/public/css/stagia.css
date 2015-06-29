@@ -38,6 +38,10 @@ img
 	width:300px;
 }
 
+.memoires {
+    cursor: pointer;
+}
+
 body {
     overflow-x: hidden;
 	background-color:#909090;

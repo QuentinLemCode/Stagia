@@ -175,4 +175,5 @@ class StageController extends Controller
         }
         return $this->render('StagiaAppBundle:Stage:listeStage.html.twig', array('stages' => $stages)); 
     }
+    
 }
