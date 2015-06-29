@@ -5,6 +5,7 @@
         {% stylesheets filter="cssrewrite,lessphp"
             '@StagiaAppBundle/Resources/public/less/bootstrap.less'
             '@StagiaAppBundle/Resources/public/css/stagia.css'
+            '@StagiaAppBundle/Resources/public/css/theme.css'
         %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
@@ -43,4 +44,5 @@
     {% endjavascripts %}
     {% block raw_javascript %}{% endblock %}        
 {% endblock foot_script_assetic %}
+{% block jquery_local_url %}{{ asset('js/libs/jquery-1.11.0.min.js') }}{% endblock jquery_local_url %}
     

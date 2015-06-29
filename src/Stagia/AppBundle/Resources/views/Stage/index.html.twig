@@ -11,8 +11,10 @@
         <div class="col-md-3 well" style="margin-left:10px">
             <div class="row">
                 <form id="form_recherche" action="{{ path('stage_search') }}" method="post">
-                    <input id="recherche" maxlength="100" class="form-control" type="text" placeholder="Rechercher..."></input>
-                    <span id="loading"><i class="fa fa-refresh fa-spin"></i></span>
+                    <input id="recherche" maxlength="100" class="form-control" type="text" placeholder="Rechercher...">
+                        <span id="loading" style="display:none"><i class="fa fa-refresh fa-spin"></i></span>
+                    </input>
+                    
                 </form>
             </div>
             <hr></hr>
@@ -27,8 +29,15 @@
         <script type="text/javascript">
         $("#loading").hide();
         $("#recherche").val('');
-        $("#recherche").keyup(function(){
-            $(".loading").show();
+        var timer;
+        $("#recherche").on('keyup',function(){
+            timer && clearTimeout(timer);
+            timer = setTimeout(postRecherche, 750);
+        });
+        
+        function postRecherche()
+        {
+            $("#loading").show();
             var query = $("#recherche").val();
             var data_form = 'recherche=' + query;
             $.ajax({
@@ -38,10 +47,11 @@
                 cache: false,
                 success: function(data){
                     $('#stages').html(data);
-                    $(".loading").hide();
+                    $("#loading").hide();
                 }
             });
             return false;
-        });
+        }
+        
         </script>
     {% endblock %}

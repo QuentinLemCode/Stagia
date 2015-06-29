@@ -1,15 +1,26 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">{{sujet.nom}}</h3>
+      <h3 class="panel-title">{{sujet.nom}}
+            {% if sujet.validation %}
+                <span class="label label-success">Validé</span>
+            {% else %}
+                <span class="label label-warning">Non validé</span>
+            {%endif%}
+          </h3>
   </div>
   <div class="panel-body">
     {{sujet.description}}
       <div class="pull-right">
           <ul class="list-inline">
-              {% if app.user == sujet.utilisateurCreateur %}
-                  <li><a href="{{ path('sujet_edit', { 'id': sujet.id }) }}" >{{icon('edit')}} Modifier</a></li>
-              {% endif %}
-              <li><a href="{{ path('sujet_show', { 'id': sujet.id }) }}" >{{icon('hand-o-right')}} Plus d'infos</a></li>
+            {% if app.user == sujet.utilisateurCreateur %}
+              <li><a href="{{ path('sujet_edit', { 'id': sujet.id }) }}" >{{icon('edit')}} Modifier</a></li>
+            {% endif %}
+            {% if not sujet.isValide() %}
+                {% if is_granted('ROLE_TUTEUR') or is_granted('ROLE_RESPONSABLE_FORMATION') %}
+                <li><a href="{{path('sujet_validate', { 'id': sujet.id }) }}" >{{icon('check')}} Valider</a></li>
+                {% endif %}
+            {% endif %}
+            <li><a href="{{ path('sujet_show', { 'id': sujet.id }) }}" >{{icon('hand-o-right')}} Plus d'infos</a></li>
           </ul>
             
       </div>
