@@ -81,6 +81,9 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: Stagia\UtilisateurBundle\Entity\Utilisateur
+    registration:
+        form:
+            type: stagia_user_registration
 
 mopa_bootstrap:
     form: 

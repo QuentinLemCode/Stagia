@@ -10,4 +10,6 @@ class DefaultController extends Controller
     {
         return $this->render('StagiaUtilisateurBundle:Default:index.html.twig', array('name' => $name));
     }
+
+
 }

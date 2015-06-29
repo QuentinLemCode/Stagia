@@ -4,7 +4,6 @@ namespace Stagia\AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class MenuBuilder
 {
@@ -19,11 +18,11 @@ class MenuBuilder
      * @param \Knp\Menu\FactoryInterface $factory
      * 
      */
-    public function __construct(FactoryInterface $factory, ContainerInterface $container,SecurityContextInterface $securityContext)
+    public function __construct(FactoryInterface $factory, ContainerInterface $container)
     {
         $this->factory = $factory;
         $this->container = $container;
-        $this->securityContext = $securityContext;
+        $this->securityContext = $this->container->get('security.context');
         $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
 
 
@@ -32,8 +31,7 @@ class MenuBuilder
     public function mainMenu()
     {
     	$menu = $this->factory->createItem('root', array(
-            'navbar' => true,
-            'pull-right' => true,
+            'navbar' => true
             ));
         $menu->addChild('Stages', array(
             'icon' => 'bolt',
@@ -47,10 +45,27 @@ class MenuBuilder
             'icon' => 'compass',
             'route' => 'sujet'
         ));
+        
+        return $menu;
+    }
+    
+    public function userMenu()
+    {
+        $menu = $this->factory->createItem('user', array(
+            'navbar' => true,
+            'pull-right' => true
+        ));
         if ($this->isLoggedIn) {
-            $menu->addChild('Deconnexion', array(
-                'icon' => 'compass',
-                'route' => 'fos_user_security_logout'));
+            $menuUtilisateur = $menu->addChild(
+                $this->securityContext->getToken()->getUser(), array(
+                    'dropdown' => true,
+                    'caret' => true,
+                    'pull-right' => true,
+                    'icon' => 'user'
+                ));
+            $menuUtilisateur->addChild('Mon compte', array('route' => 'fos_user_profile_show'));
+            $menuUtilisateur->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
+                    
         } else {
             $menu->addChild('Connexion', array(
                 'icon' => 'user',
