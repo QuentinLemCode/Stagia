@@ -1,11 +1,17 @@
 {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: false, staticTop: false, inverse: true } %}
     {% block brand %}
-        <a class="navbar-brand" href="{{path('accueil')}}">Stagia</a>
+        <a class="navbar-brand" href="{{path('accueil')}}">
+			STAGIA
+			{% image '@StagiaAppBundle/Resources/public/img/logo.png'
+			 output='/img/logo.png' %}
+			<img src="{{ asset_url }}" style="width:30px;margin-left:-40px;margin-top:-25px;" alt="Logo"/>
+			{% endimage %}
+		</a>
     {% endblock %}
-        {% block menu_container %}
+    {% block menu_container %}
         <div class="collapse navbar-collapse navbar-responsive-collapse">
             {{ mopa_bootstrap_menu('main') }}
             {{ mopa_bootstrap_menu('user') }}
-        </div>
-        {% endblock %}      
+    </div>
+    {% endblock %}      
 {% endembed %}
