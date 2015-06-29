@@ -43,15 +43,8 @@
         </tbody>
     </table>
 <p class="text-right"> Publié le {{ stage.datepublication|date('d-m-Y H:i') }} par {{ stage.utilisateurCreateur }} </p>
-
-   <ul class="record_actions">
-       <li>
-           <a href="mailto:{{stage.utilisateurCreateur.email}}">Contacter</a>
-       </li>
-    <li>
-        <a href="{{ path('stage') }}">
-            Retour
-        </a>
-    </li>
-</ul>
+<div class="actions">
+        <a class="btn btn-default" href="{{ path('stage') }}">{{icon('chevron-left')}} Retour</a>
+        <a class="btn btn-info" href="mailto:{{stage.utilisateurCreateur.email}}">{{icon('envelope')}} Contacter</a>
+</div>
 {% endblock %}

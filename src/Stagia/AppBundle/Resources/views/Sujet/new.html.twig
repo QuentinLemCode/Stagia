@@ -1,17 +1,18 @@
 {% extends '::base.html.twig' %}
 {% form_theme form _self %}
-{% block title %}Sujet de mémoire{% endblock %}
-{% block headline %}Création d'un sujet de mémoire{% endblock %}
+{% block title %}Création{% endblock %}
+{% block headline %}
+    Nouveau sujet de mémoire
+{% endblock %}
+{% block content %}
+<div class="col-lg-9">
+    <form action="{{ path('sujet_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
 
-{% block content -%}
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('sujet') }}">
-            Retour
-        </a>
-    </li>
-</ul>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{{icon('save') }} Enregistrer</button>
+            <a href="{{ path('sujet')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
