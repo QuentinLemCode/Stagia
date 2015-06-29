@@ -21,10 +21,6 @@ class SujetType extends AbstractType
             ->add('description', null, array(
                 'label' => 'Description : '
             ))   
-            ->add('sauvegarder','submit', array(
-                'label' => 'Enregistrer',
-                'icon' => 'save'
-            ))
         ;
     }
     

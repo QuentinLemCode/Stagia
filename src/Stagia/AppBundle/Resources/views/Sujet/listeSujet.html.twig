@@ -1,0 +1,7 @@
+<div class="col-md-8"> 
+    {% for sujet in sujets %}
+        {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': sujet} %}
+    {% else %}
+        <em>Pas de sujet de mémoire</em>
+    {% endfor %}
+</div>

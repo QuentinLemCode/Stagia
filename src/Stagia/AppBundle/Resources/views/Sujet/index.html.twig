@@ -2,20 +2,54 @@
 {% block title %}Sujet de mémoire{% endblock %}
 {% block headline %}Liste des sujets de mémoire{% endblock %}
 {% block content -%}
-    <div class="col-md-8">
-        {% for entity in entities %}
-            {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': entity} %}
-        {% endfor %}
+    <div id="sujets">
+        {% include "StagiaAppBundle:Sujet:listeSujet.html.twig" with { 'sujets': sujets} %}
     </div>
     <aside>
         <div class="col-md-3 well" style="margin-left:10px">
             <div class="row">
-                <input placeholder="Rechercher" />
+                <form id="form_recherche" action="{{ path('sujet_search') }}" method="post">
+                    <input id="recherche" maxlength="100" class="form-control" type="text" placeholder="Rechercher...">
+                        <span id="loading" style="display:none"><i class="fa fa-refresh fa-spin"></i></span>
+                    </input>
+                    
+                </form>
             </div>
             <hr></hr>
             <div class="row">
-                <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau sujet</a>
+                <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau stage</a>
             </div>
         </div>
     </aside>
+    {% endblock %}
+    
+    {% block raw_javascript %}
+        <script type="text/javascript">
+        $("#loading").hide();
+        $("#recherche").val('');
+        var timer;
+        $("#recherche").on('keyup',function(){
+            timer && clearTimeout(timer);
+            timer = setTimeout(postRecherche, 750);
+        });
+        
+        function postRecherche()
+        {
+            $("#loading").show();
+            var query = $("#recherche").val();
+            var data_form = 'recherche=' + query;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('sujet_search')}}",
+                data: data_form,
+                cache: false,
+                success: function(data){
+                    $('#sujets').html(data);
+                    $("#loading").hide();
+                }
+            });
+            return false;
+        }
+        
+        </script>
     {% endblock %}
