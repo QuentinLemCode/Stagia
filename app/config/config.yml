@@ -99,6 +99,9 @@ fos_user:
             from_email:
                 address:        resetting@stagia.com
                 sender_name:    stagia Resetting
+    profile:
+        form:
+          type: fos_user_profile
 
 mopa_bootstrap:
     form: 
