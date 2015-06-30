@@ -19,11 +19,6 @@ Stagia\UtilisateurBundle\Entity\Utilisateur:
             length: 60
             options:
                 default: null       
-        rue:
-            type: string
-            nullable: true
-            options:
-                default: null
         adresse1:
             type: string
             nullable: true
