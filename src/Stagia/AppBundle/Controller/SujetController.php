@@ -177,16 +177,24 @@ class SujetController extends Controller
         $sujet->valider();
         $em->flush();
         $this->addFlash('success', 'Le sujet de mémoire "'.$sujet->getNom().'" a bien été validé !');
+        
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Stagia : Votre sujet à été validé !')
+        ->setFrom($this->getUser()->getEmail())
+        ->setTo($sujet->getUtilisateurCreateur()->getEmail())
+        ->setBody($this->renderView('StagiaAppBundle:Email:sujetValide.html.twig', array(
+            'sujet' => $sujet,
+            'name' => (string)$sujet->getUtilisateurCreateur()
+                )))
+        ;
+        $this->get('mailer')->send($message);
 
-        return $this->redirect($this->generateUrl('sujet'));
+        return $this->redirect($this->generateUrl('sujet_show', array('id' => $id)));
     }
     
     public function searchAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if(!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('sujet'));
-        }
         $recherche = $request->get('recherche');
         $sujets = null;
         if($recherche)
@@ -205,6 +213,12 @@ class SujetController extends Controller
         else
         {
             $sujets = $em->getRepository('StagiaAppBundle:Sujet')->findAll();
+        }
+        if(!$request->isXmlHttpRequest()) {
+            return $this->render('StagiaAppBundle:Sujet:index.html.twig', array(
+                'sujets' => $sujets,
+                'texteRecherche' => $recherche
+            ));
         }
         return $this->render('StagiaAppBundle:Sujet:listeSujet.html.twig', array('sujets' => $sujets)); 
     }
