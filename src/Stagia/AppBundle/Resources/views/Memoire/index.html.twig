@@ -11,60 +11,51 @@
     Mémoire
 {% endblock %}
 
+{% block raw_style %}
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen">
+{% endblock %}
+
  {% block content %}
-    <div id="{{type}}">
+     {% if app.user %}
+    <div class="row">
+        <a class="btn btn-primary" href="{{ path(new_path) }}" role="button">Créer un nouveau {{type}}</a>
+    </div>
+    {% endif %}
+    <div class="row" id="{{type}}">
         {% include 'StagiaAppBundle:Memoire:listeMemoire.html.twig' %}
     </div>
-    {% include 'StagiaAppBundle:Sidebar:sidebar.html.twig' %}
     {% endblock %}
 
 {% block raw_javascript %}
-<script type="text/javascript">
-        $( document ).ready(function() {
-        $(".clickable-row").click(function() {
-            window.document.location = $(this).data("href");
-        });
-        {% if texteRecherche is defined %}
-            $('#recherche').val("{{texteRecherche}}");
-        {% endif %}
-            
-        $("#loading").hide();
-        var timer;
-        $("#recherche").on('keyup',function(){
-            timer && clearTimeout(timer);
-            timer = setTimeout(postRecherche, 500);
-        });
-        $("#buttonReset").on('click', function(){
-            $('#recherche').val('');
-            postRecherche();
-        });
-        });               
-        function postRecherche()
-        {
+<script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">    
+ $(document).ready(function() {
+     $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+    $('.memoires').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"
+        },
+        initComplete: function () {
+            var column = this.api().column(2);
+            var select = $('<select><option value=""></option></select>')
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
 
-            $("#loading").show();
-            var query = $("#recherche").val();
-            if(query !== "")
-            {
-                $("#resetSearch").show();
-            }
-            else
-            {
-                $("#resetSearch").hide();
-            }
-            var data_form = 'recherche=' + query;
-            $.ajax({
-                type: "POST",
-                url: "{{ path(search_path)}}",
-                data: data_form,
-                cache: false,
-                success: function(data){
-                    $('#{{type}}').html(data);
-                    $("#loading").hide();
-                }
-            });
-            return false;
+                    column
+                        .search( val ? '^'+val+'$' : '', true, false )
+                        .draw();
+                } );
+
+            column.data().unique().sort().each( function ( d, j ) {
+                select.append( '<option value="'+d+'">'+d+'</option>' )
+            } );
         }
-        
-        </script>
+    } );
+} );
+</script>
 {% endblock %}
