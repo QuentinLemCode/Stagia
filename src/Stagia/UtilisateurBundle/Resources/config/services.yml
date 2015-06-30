@@ -8,4 +8,4 @@ services:
         class: Stagia\UtilisateurBundle\Form\Type\ProfileFormType
         arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: stagia_user_profile }
+            - { name: form.type, alias: fos_user_profile_edit }
