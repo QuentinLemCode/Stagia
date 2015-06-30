@@ -1,9 +1,10 @@
 {% extends '::base.html.twig' %}
+{% form_theme edit_form _self %}
 {% block title %}Modification{% endblock %}
 {% block headline %}Modification du sujet : {{sujet.nom}}{% endblock %}
 
 {% block content %}
-<div class="col-lg-6">
+<div class="col-lg-8">
     <form action="{{ path('sujet_update', { 'id' : sujet.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(edit_form) }}>
         {{ form_widget(edit_form) }}
 

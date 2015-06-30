@@ -40,9 +40,7 @@ Stagia\AppBundle\Entity\Memoire:
             columns: [ id, cheminFichier ]
     lifecycleCallbacks:
       prePersist: [ preUpload ]
-      preUpdate: [ preUpload ]
       postPersist: [ upload ]
-      postUpdate: [ upload ]
       preRemove: [ preRemoveUpload ]
       postRemove: [ postRemoveUpload ]
             
