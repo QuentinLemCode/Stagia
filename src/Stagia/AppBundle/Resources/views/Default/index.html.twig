@@ -3,10 +3,16 @@
 {% block title %}Accueil{% endblock %}
 
 
-{% block headline %}Bienvenue sur Stagia{% endblock %}
+{% block headline %}
+	{% image '@StagiaAppBundle/Resources/public/img/logo.png'
+		 output='/img/logo.png' %}
+		<img src="{{ asset_url }}" alt="Logo"/>
+	{% endimage %}		
+	<br/>STAGIA
+{% endblock %}
 
-{% block content_content %}
-    Le meilleur site pour trouver vos stages
+{% block content %}
+   Trouver votre stage avec Stagia, le site des stages et des stagiaires
 {% endblock %}
     
     
