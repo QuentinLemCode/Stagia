@@ -1,21 +1,18 @@
 {% extends '::base.html.twig' %}
-{% block title %}Sujet de mémoire{% endblock %}
-{% block headline %}Liste des sujets de mémoire{% endblock %}
-{% block content -%}
-    <div class="col-md-8">
-        {% for entity in entities %}
-            {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': entity} %}
-        {% endfor %}
+
+{% set type = 'sujet' %}
+{% set search_path = 'sujet_search' %}
+{% set new_path = 'sujet_new' %}
+
+{% block title %}Sujets de mémoires{% endblock %}
+{% block headline %}Liste des sujets de mémoires{% endblock %}
+{% block content %}
+    <div id="{{type}}">
+        {% include 'StagiaAppBundle:Sujet:listeSujet.html.twig' %}
     </div>
-    <aside>
-        <div class="col-md-3 well" style="margin-left:10px">
-            <div class="row">
-                <input placeholder="Rechercher" />
-            </div>
-            <hr></hr>
-            <div class="row">
-                <a class="btn btn-default" href="{{ path('sujet_new') }}" role="button">Créer un nouveau sujet</a>
-            </div>
-        </div>
-    </aside>
+    {% include 'StagiaAppBundle:Sidebar:sidebar.html.twig' %}
     {% endblock %}
+
+{% block raw_javascript %}
+    {% include 'StagiaAppBundle:Javascript:recherche.js.twig' %}
+{% endblock %}

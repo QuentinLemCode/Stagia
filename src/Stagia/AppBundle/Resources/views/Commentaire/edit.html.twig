@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+{% block title %}Modification{% endblock %}
+{% block headline %}Modification du commentaire{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+    <form action="{{ path('commentaire_update', { 'id' : commentaire.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+
+        <div class="form-actions">
+            <a href="{{ path('sujet_show', { 'id' : commentaire.sujet.id })}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</a>
+            <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
+            <a href="{{ path('commentaire_delete', {'id': commentaire.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

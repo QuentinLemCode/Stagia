@@ -148,9 +148,6 @@ class StageController extends Controller
     public function searchAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if(!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('stage'));
-        }
         $recherche = $request->get('recherche');
         $stages = null;
         if($recherche)
@@ -170,6 +167,13 @@ class StageController extends Controller
         {
             $stages = $em->getRepository('StagiaAppBundle:Stage')->findAll();
         }
+        if(!$request->isXmlHttpRequest()) {
+            return $this->render('StagiaAppBundle:Stage:index.html.twig', array(
+                'stages' => $stages,
+                'texteRecherche' => $recherche
+            ));
+        }
         return $this->render('StagiaAppBundle:Stage:listeStage.html.twig', array('stages' => $stages)); 
     }
+    
 }

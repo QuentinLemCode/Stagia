@@ -1,16 +1,17 @@
 {% extends '::base.html.twig' %}
 {% block title %}Sujet de mémoire{% endblock %}
-{% block headline %}Sujet : {{entity.nom}}{% endblock %}
+{% block headline %}Sujet : {{sujet.nom}}
+{% endblock %}
 {% block content -%}
-    {% if entity.validation %}
-        Ce sujet est validé !
-        {% else %}
-            Ce sujet n'est pas validé
-        {%endif%}
         <div class="well">
-            <p>{{entity.description}}</p>
+            <p>{{sujet.description}}</p>
         </div>
-    <p class="text-right">Publié le {{ entity.datecreation|date('d-m-Y') }} par {{ entity.utilisateurCreateur }} </p>
+    {% if sujet.validation %}
+        <span class="label label-success">Ce sujet est validé !</span>
+    {% else %}
+        <span class="label label-warning">Ce sujet n'est pas validé</span>
+    {%endif%}
+    <p class="text-right">Publié le {{ sujet.datecreation|date('d-m-Y') }} par {{ sujet.utilisateurCreateur }} </p>
     <section class="col-md-12 col-sm-12 comments">
         <header>
             <h2>Commentaires</h2>
@@ -22,13 +23,18 @@
             {% endfor %}
 
         {% if app.user %}
-            {% include "StagiaAppBundle:Sujet:commentaireform.html.twig" with {'form': commentaireform, 'sujet_id': entity.id} %}
+            {% include "StagiaAppBundle:Sujet:commentaireform.html.twig" with {'form': commentaireform, 'sujet_id': sujet.id} %}
         {% endif %}
     </section>
 
-    <button class="btn btn-primary" href="{{ path('sujet') }}" >{{icon('chevron-left')}} Retour</button>
-    {% if app.user == entity.utilisateurCreateur %}
-    <button class="btn btn-default" href="{{ path('sujet_edit', { 'id': entity.id } )}}">{{icon('pencil')}} Modifier</button>
-    <button class="btn btn-danger" href="{{ path('sujet_delete', { 'id': entity.id } )}}">{{icon('trash')}} Supprimer</button>
+    <a class="btn btn-primary" href="{{ path('sujet') }}" >{{icon('chevron-left')}} Retour</a>
+    {% if app.user == sujet.utilisateurCreateur %}
+    <a class="btn btn-default" href="{{ path('sujet_edit', { 'id': sujet.id } )}}">{{icon('pencil')}} Modifier</a>
+    <a class="btn btn-danger" href="{{ path('sujet_delete', { 'id': sujet.id } )}}">{{icon('trash')}} Supprimer</a>
+    {% endif %}
+    {% if not sujet.isValide %}
+        {% if is_granted('ROLE_TUTEUR') or is_granted('ROLE_RESPONSABLE_FORMATION') %}
+            <a class="btn btn-warning" href="{{path('sujet_validate', { 'id': sujet.id }) }}" >{{icon('check')}} Valider</a>
+        {% endif %}
     {% endif %}
 {% endblock %}

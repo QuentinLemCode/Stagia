@@ -27,3 +27,11 @@ memoire_update:
 memoire_delete:
     path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Memoire:delete" }
+    
+memoire_search:
+    path:    /Rechercher
+    defaults: { _controller: "StagiaAppBundle:Memoire:search" }
+    
+memoire_download:
+    path:   /{id}/Telecharger
+    defaults: { _controller: "StagiaAppBundle:Memoire:download" }

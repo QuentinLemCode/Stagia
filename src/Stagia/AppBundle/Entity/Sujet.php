@@ -122,6 +122,17 @@ class Sujet
     {
         return $this->date_creation;
     }
+    
+    public function isValide()
+    {
+        return $this->validation;
+    }
+    
+    public function valider()
+    {
+        $this->validation = true;
+        return $this;
+    }
 
     /**
      * Set validation

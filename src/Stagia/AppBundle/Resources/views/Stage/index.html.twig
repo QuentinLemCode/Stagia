@@ -1,47 +1,20 @@
 {% extends '::base.html.twig' %}
+
+{% set type = 'stage' %}
+{% set search_path = 'stage_search' %}
+{% set new_path = 'stage_new' %}
+
 {% block headline %}
     Liste des stages
 {% endblock %}
-
+{% block title %}Stage{% endblock %}
 {% block content %}
-    <div id="stages">
+    <div id="{{type}}">
         {% include 'StagiaAppBundle:Stage:listeStage.html.twig' %}
     </div>
-    <aside>
-        <div class="col-md-3 well" style="margin-left:10px">
-            <div class="row">
-                <form id="form_recherche" action="{{ path('stage_search') }}" method="post">
-                    <input id="recherche" maxlength="100" class="form-control" type="text" placeholder="Rechercher..."></input>
-                    <span id="loading"><i class="fa fa-refresh fa-spin"></i></span>
-                </form>
-            </div>
-            <hr></hr>
-            <div class="row">
-                <a class="btn btn-default" href="{{ path('stage_new') }}" role="button">Créer un nouveau stage</a>
-            </div>
-        </div>
-    </aside>
+    {% include 'StagiaAppBundle:Sidebar:sidebar.html.twig' %}
     {% endblock %}
 
-    {% block raw_javascript %}
-        <script type="text/javascript">
-        $("#loading").hide();
-        $("#recherche").val('');
-        $("#recherche").keyup(function(){
-            $(".loading").show();
-            var query = $("#recherche").val();
-            var data_form = 'recherche=' + query;
-            $.ajax({
-                type: "POST",
-                url: "{{ path('stage_search')}}",
-                data: data_form,
-                cache: false,
-                success: function(data){
-                    $('#stages').html(data);
-                    $(".loading").hide();
-                }
-            });
-            return false;
-        });
-        </script>
-    {% endblock %}
+{% block raw_javascript %}
+    {% include 'StagiaAppBundle:Javascript:recherche.js.twig' %}
+{% endblock %}
