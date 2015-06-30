@@ -11,14 +11,14 @@
   border-color: #2c3e50;
   color:white;
 }
-.parTitre
+.titreMenu
 {
 	color:white;
 	font-weight:bold;
 	font-size: 1.6em;
 	text-align: center;
 }
-.par
+.texte
 {
 	color:white;
 	font-weight:bold;
@@ -33,7 +33,7 @@
 
 img
 {
-	margin-left:36%;
+	margin-left:0%;
 
 	width:300px;
 }
