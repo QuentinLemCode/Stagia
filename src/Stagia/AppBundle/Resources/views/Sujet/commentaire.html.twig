@@ -9,4 +9,8 @@
           </div>
         </div>
       </div>
+      {% if app.user == commentaire.utilisateurcreateur or is_granted('ROLE_ADMIN') %}
+          <a href="{{path('commentaire_edit', { 'id': commentaire.id } ) }}">{{icon('pencil')}} Modifier</a>
+          <a href="{{path('commentaire_delete', { 'id': commentaire.id } ) }}">{{icon('trash')}} Supprimer</a>
+      {% endif %}
 </article>

@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}Stage{% endblock %}
 {% block headline %}
     {{ stage.titre }}
 {% endblock %}
@@ -45,6 +45,10 @@
 <p class="text-right"> Publié le {{ stage.datepublication|date('d-m-Y H:i') }} par {{ stage.utilisateurCreateur }} </p>
 <div class="actions">
         <a class="btn btn-default" href="{{ path('stage') }}">{{icon('chevron-left')}} Retour</a>
+        {% if app.user == stage.utilisateurCreateur %}
+            <a class="btn btn-default" href="{{ path('stage_edit', { 'id': stage.id } )}}">{{icon('pencil')}} Modifier</a>
+            <a class="btn btn-danger" href="{{ path('stage_delete', { 'id': stage.id } )}}">{{icon('trash')}} Supprimer</a>
+        {% endif %}
         <a class="btn btn-info" href="mailto:{{stage.utilisateurCreateur.email}}">{{icon('envelope')}} Contacter</a>
 </div>
 {% endblock %}

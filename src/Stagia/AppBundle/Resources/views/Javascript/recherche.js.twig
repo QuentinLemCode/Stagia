@@ -1,29 +1,5 @@
-{% extends '::base.html.twig' %}
-
-{% set type = 'memoire' %}
-{% set search_path = 'memoire_search' %}
-{% set new_path = 'memoire_new' %}
-
-{% block headline %}
-    Liste des mémoires
-{% endblock %}
-{% block title %}
-    Mémoire
-{% endblock %}
-
- {% block content %}
-    <div id="{{type}}">
-        {% include 'StagiaAppBundle:Memoire:listeMemoire.html.twig' %}
-    </div>
-    {% include 'StagiaAppBundle:Sidebar:sidebar.html.twig' %}
-    {% endblock %}
-
-{% block raw_javascript %}
-<script type="text/javascript">
+        <script type="text/javascript">
         $( document ).ready(function() {
-        $(".clickable-row").click(function() {
-            window.document.location = $(this).data("href");
-        });
         {% if texteRecherche is defined %}
             $('#recherche').val("{{texteRecherche}}");
         {% endif %}
@@ -67,4 +43,3 @@
         }
         
         </script>
-{% endblock %}
