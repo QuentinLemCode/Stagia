@@ -30,7 +30,21 @@ class RegistrationFormType extends BaseType
             ->add('adresse2', null, array('label' => 'Complément d\'adresse: '))
             ->add('codepostal', null, array('label' => 'Code Postal:'))
             ->add('ville', null, array('label' => 'Ville:'))
-            ->add('telephone', null, array('label' => 'Téléphone:'));
+            ->add('telephone', null, array('label' => 'Téléphone:'))
+            ->add('roles', 'choice', array(
+                'choices' => array(
+                'ROLE_MAITRE_APPRENTISSAGE' => 'Maitre d\'apprentissage',
+                'ROLE_RESPONSABLE' => 'Résponsable',
+                'ROLE_TUTEUR' => 'Tuteur',
+                'ROLE_ETUDIANT' => 'Etudiant',
+                //'ROLE_ADMIN' => 'Admin:',
+                //'ROLE_SUPER_ADMIN' => 'Super Admin:',
+                ),
+                'multiple' => true,
+                'expanded' => true,
+                'empty_value' => false,
+            ));
+
     }
 
     public function getName()
