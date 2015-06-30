@@ -114,7 +114,7 @@ class MemoireController extends Controller
         if ($editForm->isValid()) {
             $fileUploaded = null !== $editForm['file']->getData();
             if($fileUploaded) {
-                $memoire->file = $editForm['file']->getData();
+                $memoire->setFile($editForm['file']->getData());
                 $memoire->preUpload();
             }
             $em->flush();

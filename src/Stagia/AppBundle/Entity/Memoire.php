@@ -2,6 +2,8 @@
 
 namespace Stagia\AppBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * Memoire
  */
@@ -44,7 +46,7 @@ class Memoire
     /**
      * Fichier
      */
-    public $file;
+    protected $file;
     /**
      * Fichier
      */
@@ -66,6 +68,17 @@ class Memoire
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function setFile(File $file = null)
+    {
+        $this->file = $file;
+        return $this;
+    }
+    
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
