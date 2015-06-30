@@ -33,20 +33,41 @@ class MenuBuilder
     	$menu = $this->factory->createItem('root', array(
             'navbar' => true
             ));
-        $menu->addChild('Stages', array(
+        $stage = $menu->addChild('Stages', array(
             'icon' => 'bolt',
             'route' => 'stage',
             ));
-        $menu->addChild('Mémoires', array(
+        $this->submenu($stage, 'stage');
+        
+        $memoire = $menu->addChild('Mémoires', array(
             'icon' => 'book',
             'route' => 'memoire',
         ));
-        $menu->addChild('Sujets de mémoires', array(
+        $this->submenu($memoire, 'memoire');
+        
+        $sujet = $menu->addChild('Sujets de mémoires', array(
             'icon' => 'compass',
             'route' => 'sujet'
         ));
+        $this->submenu($sujet, 'sujet');
         
         return $menu;
+    }
+    
+    private function submenu($root, $type)
+    {
+        $root->setDisplayChildren(false);
+        $id = $this->container->get('request')->get('id');
+        if (empty($id))
+        {
+            $id = 0;
+        }
+        $root->addChild('Afficher', array('route' => $type.'_show', 'routeParameters' => array('id' => $id)));
+        $root->addChild('Nouveau', array('route' => $type.'_new'));
+        $root->addChild('Creer', array('route' => $type.'_create', 'routeParameters' => array('id' => $id)));
+        $root->addChild('Modifier', array('route' => $type.'_edit', 'routeParameters' => array('id' => $id)));
+        $root->addChild('Mise A Jour', array('route' => $type.'_update', 'routeParameters' => array('id' => $id)));
+        $root->addChild('Supprimer', array('route' => $type.'_delete', 'routeParameters' => array('id' => $id)));
     }
     
     public function userMenu()

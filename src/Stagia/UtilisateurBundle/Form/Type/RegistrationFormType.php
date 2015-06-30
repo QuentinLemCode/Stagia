@@ -25,6 +25,7 @@ class RegistrationFormType extends BaseType
         parent::buildForm($builder, $options);
         $builder
             ->add('nom', null, array('label' => 'Nom: '))
+            ->add('prenom', null, array('label' => 'Prénom: '))
             ->add('adresse1', null, array('label' => 'Adresse: '))
             ->add('adresse2', null, array('label' => 'Complément d\'adresse: '))
             ->add('codepostal', null, array('label' => 'Code Postal:'))
