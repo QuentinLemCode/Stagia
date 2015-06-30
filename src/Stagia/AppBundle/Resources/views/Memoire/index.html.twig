@@ -20,6 +20,7 @@
     <div class="row">
         <a class="btn btn-primary" href="{{ path(new_path) }}" role="button">Créer un nouveau {{type}}</a>
     </div>
+	<br/>
     {% endif %}
     <div class="row" id="{{type}}">
         {% include 'StagiaAppBundle:Memoire:listeMemoire.html.twig' %}

@@ -2,6 +2,6 @@
     {% for sujet in sujets %}
         {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': sujet} %}
     {% else %}
-        <em>Pas de sujet de mémoire</em>
+        <em class="vide">Pas de sujet de mémoire</em>
     {% endfor %}
 </div>

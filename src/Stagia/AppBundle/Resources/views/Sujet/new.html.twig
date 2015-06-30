@@ -2,7 +2,7 @@
 {% form_theme form _self %}
 {% block title %}Création{% endblock %}
 {% block headline %}
-    Nouveau sujet de mémoire
+    NOUVEAU SUJET DE MEMOIRE
 {% endblock %}
 {% block content %}
 <div class="col-lg-8">
@@ -10,9 +10,10 @@
         {{ form_widget(form) }}
 
         <div class="form-actions">
+			<a href="{{ path('sujet')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
             <button type="submit" class="btn btn-primary">{{icon('save') }} Enregistrer</button>
-            <a href="{{ path('sujet')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
         </div>
+		<br/>
     </form>
 </div>
 {% endblock %}

@@ -50,3 +50,4 @@ web/bundles/*
 app/check.php
 app/SymfonyRequirements.php
 .idea/*
+web/img/logo.png

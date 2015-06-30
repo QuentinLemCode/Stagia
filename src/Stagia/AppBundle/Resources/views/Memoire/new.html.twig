@@ -2,16 +2,17 @@
 {% form_theme form _self %}
 {% block title %}Création mémoire{% endblock %}
 {% block headline %}
-    Nouveau mémoire
+    NOUVEAU MEMOIRE
 {% endblock %}
 {% block content %}
 <div class="col-lg-8">
-    <form action="{{ path('memoire_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+    <form style="margin-left:200px;" action="{{ path('memoire_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <div class="form-actions">
+			<a href="{{ path('memoire')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
             <button type="submit" class="btn btn-primary">{{icon('save') }} Enregistrer</button>
-            <a href="{{ path('memoire')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
         </div>
     </form>
+	<br/>
 </div>
 {% endblock %}

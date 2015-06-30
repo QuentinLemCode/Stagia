@@ -2,6 +2,6 @@
     {% for stage in stages %}
         {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': stage} %}
     {% else %}
-        <em>Pas de stages</em>
+        <em class="vide">Pas de stages</em>
     {% endfor %}
 </div>
