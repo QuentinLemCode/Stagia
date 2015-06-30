@@ -3,5 +3,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}<br />
+    Veuillez vérifier vos emails</p>
 {% endblock fos_user_content %}
