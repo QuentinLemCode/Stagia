@@ -2,7 +2,13 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Connexion{% endblock %}
-{% block headline %}Veuillez vous connecter{% endblock %}
+{% block headline %}
+{% image '@StagiaAppBundle/Resources/public/img/logo.png'
+		 output='/img/logo.png' %}
+		<img src="{{ asset_url }}" style="width:230px;" alt="Logo"/>
+{% endimage %}	
+</br>CONNEXION
+{% endblock %}
 {% block content %}
 
     {% trans_default_domain 'FOSUserBundle' %}
