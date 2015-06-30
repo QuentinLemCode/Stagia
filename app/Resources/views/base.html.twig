@@ -35,7 +35,9 @@
 		</div>
     {% endblock %}
 
-    {% block footer %} Stagia - 2015 {% endblock %}
+    {% block footer %} 
+		{% include "StagiaAppBundle:Footer:footer.html.twig" %}
+	{% endblock %}
     
     {% block foot_script_assetic %}
     {% javascripts

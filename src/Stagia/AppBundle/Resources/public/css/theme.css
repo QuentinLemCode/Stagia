@@ -171,6 +171,10 @@ header .intro-text .skills {
     border: 0;
 }
 
+.navbar-inverse {
+    background-color: #2c3e50;
+}
+
 section {
     padding: 100px 0;
 }
@@ -345,6 +349,7 @@ footer h3 {
 
 footer .footer-above {
     padding-top: 50px;
+	width:100%;
     background-color: #2c3e50;
 }
 

@@ -2,7 +2,7 @@
 {% form_theme form _self %}
 {% block title %}Modification{% endblock %}
 {% block headline %}
-    Modification du stage
+   MODIFICATION DU STAGE
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,8 @@
             <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
             <a href="{{ path('stage_delete', {'id': stage.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</a>
         </div>
-    </form>
+		
+    </form><br/>
 </div>
 {% endblock %}
     

@@ -2,18 +2,19 @@
 {% form_theme form _self %}
 {% block title %}Création{% endblock %}
 {% block headline %}
-    Nouveau stage
+    NOUVEAU STAGE
 {% endblock %}
 {% block content %}
 <div class="col-lg-8">
-    <form action="{{ path('stage_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+    <form style="margin-left:200px;" action="{{ path('stage_create') }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 
         <div class="form-actions">
+			<a href="{{ path('stage')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
             <button type="submit" class="btn btn-primary">{{icon('save') }} Enregistrer</button>
-            <a href="{{ path('stage')}}" class="btn btn-default">{{icon('chevron-left')}} Retour</a>
         </div>
     </form>
+	<br/>
 </div>
 {% endblock %}
 {% block foot_script_assetic %}
