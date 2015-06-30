@@ -14,8 +14,10 @@
                 </form>
             </div>
             <hr></hr>
+            {% if app.user %}
             <div class="row">
                 <a class="btn btn-primary" href="{{ path(new_path) }}" role="button">Créer un nouveau {{type}}</a>
             </div>
+            {% endif %}
         </div>
     </aside>

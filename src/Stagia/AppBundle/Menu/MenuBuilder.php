@@ -41,7 +41,7 @@ class MenuBuilder
             'icon' => 'book',
             'route' => 'memoire',
         ));
-        $menu->addChild('Sujets de mémoire', array(
+        $menu->addChild('Sujets de mémoires', array(
             'icon' => 'compass',
             'route' => 'sujet'
         ));
