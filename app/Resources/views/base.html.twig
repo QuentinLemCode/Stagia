@@ -1,6 +1,5 @@
 {% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
-
     {% block head_style %}
         {% stylesheets filter="cssrewrite,lessphp"
             '@StagiaAppBundle/Resources/public/less/bootstrap.less'
@@ -10,7 +9,7 @@
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
             <link href="/Stagia/web/css/glyphicons.css" type="text/css" rel="stylesheet" media="screen" />
-            {% block raw_style %}{% endblock %}
+        {% block raw_style %}{% endblock %}
     {% endblock head_style %}
  
     {% block navbar %}
@@ -26,8 +25,14 @@
         </div>
     {% endblock %}
             
-    {% block headline %}
-            Stagia
+    {% block page_header %}
+        <div class="titreMenu">
+			<span class="name">
+				{% block headline %}
+				{% endblock %}
+			</span>
+			<hr class="star-light">
+		</div>
     {% endblock %}
 
     {% block footer %} Stagia - 2015 {% endblock %}
