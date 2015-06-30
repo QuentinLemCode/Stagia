@@ -19,6 +19,7 @@ class ProfileFormType extends BaseType
             ->add('ville', null, array('label' => 'Ville:'))
             ->add('telephone', null, array('label' => 'Téléphone:'))
             ->add('roles', 'choice', array(
+                'multiple' => false,
                 'choices' => array(
                     'ROLE_MAITRE_APPRENTISSAGE' => 'Maitre d\'apprentissage',
                     'ROLE_RESPONSABLE' => 'Résponsable',

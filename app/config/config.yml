@@ -90,15 +90,15 @@ fos_user:
             enabled:    true
             from_email:
                 address:        registration@stagia.com
-                sender_name:    stagia Registration
+                sender_name:    Stagia
     from_email:
         address:        noreply@stagia.com
-        sender_name:    stagia App
+        sender_name:    Stagia
     resetting:
         email:
             from_email:
                 address:        resetting@stagia.com
-                sender_name:    stagia Resetting
+                sender_name:    Stagia
     profile:
         form:
             type: fos_user_profile_edit
