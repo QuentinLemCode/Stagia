@@ -10,6 +10,7 @@
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
         {% endstylesheets %}
             <link href="/Stagia/web/css/glyphicons.css" type="text/css" rel="stylesheet" media="screen" />
+            {% block raw_style %}{% endblock %}
     {% endblock head_style %}
  
     {% block navbar %}
