@@ -1,16 +1,20 @@
 {% extends '::base.html.twig' %}
+{% form_theme edit_form _self %}
+{% block title %}Modification{% endblock %}
+{% block headline %}
+    Modification du mémoire
+{% endblock %}
 
-{% block content -%}
-    <h1>Memoire edit</h1>
+{% block content %}
+<div class="col-lg-8">
+    <form action="{{ path('memoire_update', { 'id' : memoire.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
 
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('memoire') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <div class="form-actions">
+            <a href="{{ path('memoire')}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</a>
+            <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
+            <a href="{{ path('memoire_delete', {'id': memoire.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

@@ -71,10 +71,12 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport:  gmail
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
+    username:  stagia91@gmail.com
+    password:  Stagia91000
     spool:     { type: memory }
     
 fos_user:
@@ -84,6 +86,22 @@ fos_user:
     registration:
         form:
             type: stagia_user_registration
+        confirmation:
+            enabled:    true
+            from_email:
+                address:        registration@stagia.com
+                sender_name:    stagia Registration
+    from_email:
+        address:        noreply@stagia.com
+        sender_name:    stagia App
+    resetting:
+        email:
+            from_email:
+                address:        resetting@stagia.com
+                sender_name:    stagia Resetting
+    profile:
+        form:
+            type: fos_user_profile_edit
 
 mopa_bootstrap:
     form: 

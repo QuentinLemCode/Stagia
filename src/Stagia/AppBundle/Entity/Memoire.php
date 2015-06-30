@@ -280,11 +280,6 @@ class Memoire
         return null === $this->cheminFichier ? null : $this->getUploadRootDir().'/'.$this->id.$this->cheminFichier;
     }
 
-    public function getWebPath()
-    {
-        return null === $this->cheminFichier ? null : '../../'.$this->getUploadDir().'/'.$this->id.$this->cheminFichier;
-    }
-
     protected function getUploadRootDir()
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
@@ -296,5 +291,18 @@ class Memoire
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
         return 'uploads/memoires';
+    }
+    
+    public function getFileName()
+    {
+        return htmlspecialchars(trim($this->nom)).$this->cheminFichier;
+    }
+    
+    public function isMemoireExist()
+    {
+        if($this->getCheminFichier() != null) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,9 +1,18 @@
 {% extends '::base.html.twig' %}
-{% form_theme form _self %}
+{% form_theme edit_form _self %}
 {% block title %}Modification{% endblock %}
-{% block headline %}Modification du sujet : {{entity.nom}}{% endblock %}
-{% block content -%}
-    {{ form(edit_form) }}
-    <button class="btn btn-primary" href="{{path('sujet')}}">{{icon('chevron-left')}} Retour</button>
-    <button class="btn btn-danger" href="{{path('sujet_delete', { 'id' : entity.id } ) }}">{{icon('trash')}} Supprimer</button>
+{% block headline %}Modification du sujet : {{sujet.nom}}{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+    <form action="{{ path('sujet_update', { 'id' : sujet.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+
+        <div class="form-actions">
+            <a href="{{ path('sujet')}}" class="btn btn-default">{{ icon('chevron-left') }} Retour</a>
+            <button type="submit" class="btn btn-primary">{{ icon('save') }} Enregistrer</button>
+            <a href="{{ path('sujet_delete', {'id': sujet.id } ) }}" class="btn btn-danger">{{ icon('trash')}} Supprimer</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

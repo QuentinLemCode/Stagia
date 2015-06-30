@@ -1,10 +1,52 @@
 /* 
     Document   : stagia.css
     Created on : 28 mai 2015, 13:52:49
-    Author     : LEMEASLE_Q
+    Author     : LEMEASLE Quentin, BOUHAFS Aziz 
     Description:
         Purpose of the stylesheet follows.
 */
+
+.navbar-default {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+  color:white;
+}
+.parTitre
+{
+	color:white;
+	font-weight:bold;
+	font-size: 1.6em;
+	text-align: center;
+}
+.par
+{
+	color:white;
+	font-weight:bold;
+	font-size: 2.3em;
+	text-align: center;
+}
+
+.name
+{
+	font-size: 2.5em;
+}
+
+img
+{
+	margin-left:36%;
+
+	width:300px;
+}
+
+.memoires {
+    cursor: pointer;
+}
+
+body {
+    overflow-x: hidden;
+	background-color:#909090;
+}
+
 .commentaire {
     padding: 10px;
     margin-bottom: 1.875rem;

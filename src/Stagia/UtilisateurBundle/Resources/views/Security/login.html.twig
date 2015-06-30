@@ -35,6 +35,9 @@
 
             <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
         </form>
+        <form action="{{ path('fos_user_resetting_request') }}">
+            <input type="submit" value="{{ 'resetting.request.submit'|trans }}"/>
+        </form>
     {% endblock fos_user_content %}
 
 {% endblock %}
