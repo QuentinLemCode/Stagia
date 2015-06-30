@@ -177,8 +177,19 @@ class SujetController extends Controller
         $sujet->valider();
         $em->flush();
         $this->addFlash('success', 'Le sujet de mémoire "'.$sujet->getNom().'" a bien été validé !');
+        
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Stagia : Votre sujet à été validé !')
+        ->setFrom($this->getUser()->getEmail())
+        ->setTo($sujet->getUtilisateurCreateur()->getEmail())
+        ->setBody($this->renderView('StagiaAppBundle:Email:sujetValide.html.twig', array(
+            'sujet' => $sujet,
+            'name' => (string)$sujet->getUtilisateurCreateur()
+                )))
+        ;
+        $this->get('mailer')->send($message);
 
-        return $this->redirect($this->generateUrl('sujet'));
+        return $this->redirect($this->generateUrl('sujet_show', array('id' => $id)));
     }
     
     public function searchAction(Request $request)
