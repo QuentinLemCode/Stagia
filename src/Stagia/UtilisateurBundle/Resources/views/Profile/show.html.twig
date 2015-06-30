@@ -1,0 +1,73 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block title %}Profil{% endblock %}
+{% block headline %}Mon compte{% endblock %}
+
+{% block content %}
+    {% block fos_user_content %}
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 fos_user_user_show">
+        <table id="memoires" class="memoires">
+            <tbody>
+                <tr><th>Nom d'utilisateur</th><td>{{ user.username }}</td></tr>
+                <tr><th>Nom</th><td>{{ user.nom }}</td></tr>
+                <tr><th>Prénom</th><td>{{ user.prenom }}</td></tr>
+                <tr><th>Adresse</th><td>{{ user.adresse1 }}</td></tr>
+                <tr><th>Complément d'adresse</th><td>{{ user.adresse2 }}</td></tr>
+                <tr><th>Code postal</th><td>{{ user.codepostal }}</td></tr>
+                <tr><th>Ville</th><td>{{ user.ville }}</td></tr>
+                <tr><th>Téléphone</th><td>{{ user.telephone }}</td></tr>
+                <tr><th>Email</th><td>Email</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% if user.stage is not empty %}
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Vos stages</h3>
+        {% for stage in user.stage %}
+            {% include "StagiaAppBundle:Stage:stage.html.twig" with {'stage': stage} %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if user.memoire is not empty %}
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Vos mémoires</h3>
+        {% for memoire in user.memoire %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{memoire.nom}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{memoire.description}}
+                    <div class="pull-right">
+                        <ul class="list-inline">
+                        {% if app.user == memoire.utilisateurCreateur %}
+                            <li><a href="{{ path('memoire_edit', { 'id': memoire.id }) }}" >{{icon('edit')}} Modifier</a></li>
+                        {% endif %}
+                            <li><a href="{{ path('memoire_show', { 'id': memoire.id }) }}" >{{icon('hand-o-right')}} Plus d'infos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if user.sujet is not empty %}
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Vos sujets de mémoire</h3>
+        {% for sujet in user.sujet %}
+            {% include "StagiaAppBundle:Sujet:sujet.html.twig" with {'sujet': sujet} %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+<div class="row">
+    <form action="{{ path('fos_user_change_password') }}">
+        <input type="submit" value="{{ 'Modifier mot de passe'|trans }}"/>
+    </form>
+
+    <form action="{{ path('fos_user_profile_edit') }}">
+        <input type="submit" value="{{ 'Modifier le profil'|trans }}"/>
+    </form>
+</div>
+    {% endblock fos_user_content %}
+{% endblock %}
