@@ -6,7 +6,9 @@
     {{stage.description}}
       <div class="pull-right">
           <ul class="list-inline">
-              <li><a href="{{ path('stage_edit', { 'id': stage.id }) }}" >{{icon('edit')}} Modifier</a></li>
+              {% if app.user == stage.utilisateurCreateur %}
+                <li><a href="{{ path('stage_edit', { 'id': stage.id }) }}" >{{icon('edit')}} Modifier</a></li>
+                {% endif %}
               <li><a href="{{ path('stage_show', { 'id': stage.id }) }}" >{{icon('hand-o-right')}} Plus d'infos</a></li>
           </ul>
             

@@ -1,11 +1,12 @@
 {% extends '::base.html.twig' %}
-
+{% form_theme edit_form _self %}
+{% block title %}Modification{% endblock %}
 {% block headline %}
     Modification du stage
 {% endblock %}
 
 {% block content %}
-<div class="col-lg-6">
+<div class="col-lg-8">
     <form action="{{ path('stage_update', { 'id' : stage.id } ) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 

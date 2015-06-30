@@ -27,3 +27,11 @@ sujet_update:
 sujet_delete:
     path:     /{id}/Supprimer
     defaults: { _controller: "StagiaAppBundle:Sujet:delete" }
+
+sujet_validate:
+    path:    /{id}/Valider
+    defaults: { _controller: "StagiaAppBundle:Sujet:validate" }
+    
+sujet_search:
+    path:   /Recherche 
+    defaults: { _controller: "StagiaAppBundle:Sujet:search" }
