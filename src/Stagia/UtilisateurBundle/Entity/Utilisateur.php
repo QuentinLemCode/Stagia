@@ -27,12 +27,6 @@ class Utilisateur extends BaseUser implements EquatableInterface
      * @var string
      */
     private $prenom;
-
-    /**
-     * @var string
-     */
-    private $rue;
-
     /**
      * @var string
      */
@@ -105,30 +99,6 @@ class Utilisateur extends BaseUser implements EquatableInterface
     public function getPrenom()
     {
         return $this->prenom;
-    }
-
-    /**
-     * Set rue
-     *
-     * @param string $rue
-     *
-     * @return Utilisateur
-     */
-    public function setRue($rue)
-    {
-        $this->rue = $rue;
-
-        return $this;
-    }
-
-    /**
-     * Get rue
-     *
-     * @return string
-     */
-    public function getRue()
-    {
-        return $this->rue;
     }
 
     /**
